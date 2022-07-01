@@ -22,12 +22,15 @@ export function swimToFood(
     differenceY += 30;
   }
 
+  const { x, y } = fish.getBoundingClientRect();
+
   const distance = Math.sqrt(
-    Math.abs(foodX - fish.getBoundingClientRect().x) ** 2 +
-      Math.abs(foodY - fish.getBoundingClientRect().y) ** 2
+    Math.abs(foodX - x) ** 2 + Math.abs(foodY - y) ** 2
   );
 
-  fish.style.transition = `transform ${distance / 500}s linear`;
+  console.log("DISTANCE: ", (distance / 100).toFixed(2));
+
+  fish.style.transition = `transform ${(distance / 100).toFixed(2)}s linear`;
   fish.style.transform = `translate(${differenceX}px, ${differenceY}px)`;
   fish.ontransitionend = onEnd || null;
 }
