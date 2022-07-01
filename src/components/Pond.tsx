@@ -22,7 +22,6 @@ export default function Pond() {
   function eatFood() {
     if (isSwimming()) return;
     setIsSwimming(true);
-    console.log("here");
     const { x, y } = fishStore.fishFood[0];
     swimToFood(fishStore.fish!, fishStore.fishStartingPos!, { x, y }, () => {
       setIsSwimming(false);
