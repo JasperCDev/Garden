@@ -2,7 +2,7 @@ export function swimToFood(
   fish: HTMLDivElement,
   fishPos: { x: number; y: number },
   fishFood: { x: number; y: number },
-  onEnd?: () => void
+  onEnd: () => void
 ) {
   const { x: fishX, y: fishY } = fishPos;
   const { x: foodX, y: foodY } = fishFood;
@@ -28,9 +28,14 @@ export function swimToFood(
     Math.abs(foodX - x) ** 2 + Math.abs(foodY - y) ** 2
   );
 
-  console.log("DISTANCE: ", (distance / 100).toFixed(2));
+  if (distance < 100) {
+    onEnd();
+  }
 
-  fish.style.transition = `transform ${(distance / 100).toFixed(2)}s linear`;
+  fish.style.transition = `transform ${(
+    (distance - Math.sqrt(30 ** 2 + 30 ** 2)) /
+    100
+  ).toFixed(2)}s linear`;
   fish.style.transform = `translate(${differenceX}px, ${differenceY}px)`;
   fish.ontransitionend = onEnd || null;
 }
