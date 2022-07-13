@@ -4,7 +4,8 @@
   transform-origin: bottom;
   --off-set: 250;
   --stem-width: 1;
-
+  position: relative;
+  top: -150px;
   @for $i from 1 through 8 {
     --leaf#{$i}-scale: 0.1;
   }
