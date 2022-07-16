@@ -1,7 +1,9 @@
+type Point = { x: number; y: number };
+
 export function swimToFood(
   fish: HTMLDivElement,
-  fishPos: { x: number; y: number },
-  fishFood: { x: number; y: number },
+  fishPos: Point,
+  fishFood: Point,
   onEnd: () => void
 ) {
   const { x: fishX, y: fishY } = fishPos;
@@ -38,4 +40,17 @@ export function swimToFood(
   ).toFixed(2)}s linear`;
   fish.style.transform = `translate(${differenceX}px, ${differenceY}px)`;
   fish.ontransitionend = onEnd || null;
+}
+
+export function radiansToDegrees(rad: number) {
+  return (rad * 180) / Math.PI;
+}
+
+export function getAngle(x: number, y: number) {
+  const rad = Math.atan2(y, x);
+  return radiansToDegrees(rad);
+}
+
+export function getLine(a: number, b: number) {
+  return Math.sqrt(a * a + b * b);
 }
