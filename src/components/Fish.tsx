@@ -14,7 +14,11 @@ export default function Fish(props: Props) {
       xmlns="http://www.w3.org/2000/svg"
       class={styles.fish}
     >
-      <path d="M43 25.5L10.75 3.41635L10.75 47.5836L43 25.5Z" fill="#FFB69E" />
+      <path
+        class={styles.fin}
+        d="M43 25.5L10.75 3.41635L10.75 47.5836L43 25.5Z"
+        fill="#FFB69E"
+      />
       <ellipse
         rx="62.5"
         ry="18.5"

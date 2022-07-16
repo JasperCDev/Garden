@@ -2,3 +2,13 @@
   height: 30px;
   width: 60px;
 }
+
+.fin {
+  transform-origin: 40px;
+  animation: wiggle 0.3s infinite alternate ease-in-out;
+}
+
+@keyframes wiggle {
+  0% { transform: rotate(-5deg); }
+  100% { transform: rotate(5deg); }
+}
