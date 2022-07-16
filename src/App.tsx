@@ -3,12 +3,13 @@ import Plant from "./components/Plant";
 import { plants } from "./stores/plants.store";
 import { For } from "solid-js";
 import Rain from "./components/Rain";
+import Pond from "./components/Pond";
 
 export default function App() {
   return (
     <div class={styles.App}>
-      {/* <Pond /> */}
-      <div
+      <Pond />
+      {/* <div
         style={{
           display: "flex",
           "flex-wrap": "wrap",
@@ -31,7 +32,7 @@ export default function App() {
             );
           }}
         </For>
-      </div>
+      </div> */}
       <Rain />
     </div>
   );
