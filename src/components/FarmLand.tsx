@@ -1,17 +1,16 @@
-import { For } from "solid-js";
+import { For, JSX } from "solid-js";
+import { plants } from "../stores/plants.store";
 import styles from "./FarmLand.module.scss";
-import Plant from "./Plant";
-
-const tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import PlantContainer from "./PlantContainer";
 
 export default function FarmLand() {
   return (
     <div class={styles.farmLand}>
-      <For each={tiles}>
-        {(tile, i) => {
+      <For each={plants.plants}>
+        {(plant, i) => {
           return (
             <div class={styles.tile}>
-              <Plant count={3000} />
+              <PlantContainer plant={plant} />
             </div>
           );
         }}

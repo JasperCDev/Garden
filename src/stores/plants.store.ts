@@ -1,11 +1,12 @@
 import { createStore } from "solid-js/store";
 
-interface Plant {
-  count: number;
-  soilMoisture: number;
+export interface PlantObject {
+  water: number;
+  life: number;
+  id: number;
 }
 
-type Plants = Array<Plant>;
+export type Plants = Array<PlantObject>;
 
 interface Store {
   plants: Plants;
@@ -13,11 +14,22 @@ interface Store {
 
 const initialState: Store = {
   plants: [
-    { count: 1000, soilMoisture: 0 },
-    { count: 2000, soilMoisture: 0 },
-    { count: 3000, soilMoisture: 0 },
-    { count: 4000, soilMoisture: 0 },
+    { water: 0, life: 0, id: 1 },
+    { water: 0, life: 0, id: 2 },
+    { water: 0, life: 0, id: 3 },
+    { water: 0, life: 0, id: 4 },
   ],
 };
 
 export const [plants, setPlants] = createStore<Store>(initialState);
+
+export function editPlant(newPlant: PlantObject) {
+  const newPlants = plants.plants.map((p) => {
+    if (p.id === newPlant.id) {
+      return { ...p, ...newPlant };
+    }
+    return p;
+  });
+
+  setPlants({ plants: newPlants });
+}
