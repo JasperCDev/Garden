@@ -18,6 +18,11 @@ const initialState: Store = {
     { water: 0, life: 0, id: 2 },
     { water: 0, life: 0, id: 3 },
     { water: 0, life: 0, id: 4 },
+    { water: 0, life: 0, id: 5 },
+    { water: 0, life: 0, id: 6 },
+    { water: 0, life: 0, id: 7 },
+    { water: 0, life: 0, id: 8 },
+    { water: 0, life: 0, id: 9 },
   ],
 };
 

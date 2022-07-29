@@ -1,7 +1,7 @@
 import { editPlant, PlantObject } from "../stores/plants.store";
 
 export function animateCount(plant: PlantObject) {
-  let range = 3000;
+  let range = 600;
 
   let life = plant.life;
   let water = plant.water;
@@ -25,7 +25,7 @@ export function animateCount(plant: PlantObject) {
     editPlant({ ...plant, water, life });
 
     if (progress !== 1) {
-      requestAnimationFrame(callback);
+      return requestAnimationFrame(callback);
     }
   };
 

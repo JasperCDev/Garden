@@ -1,6 +1,7 @@
 import Plant from "./Plant";
 import { editPlant, PlantObject } from "../stores/plants.store";
 import { animateCount } from "../util/animateCount";
+import styles from "./PlantContainer.module.scss";
 
 interface Props {
   plant: PlantObject;
@@ -14,19 +15,10 @@ export default function PlantContainer(props: Props) {
   }
 
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          "justify-content": "center",
-          position: "absolute",
-          width: "10vw",
-          height: "10vw",
-          "z-index": 9999999,
-        }}
-        onClick={waterPlant}
-      ></div>
+    <div class={styles.soil}>
+      {/* hitbox */}
+      <div class={styles.hitbox} onClick={waterPlant}></div>
       <Plant plant={props.plant} />
-    </>
+    </div>
   );
 }
