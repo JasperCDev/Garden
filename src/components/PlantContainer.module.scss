@@ -1,18 +1,18 @@
 .soil {
   background-color: burlywood;
-  width: 5vw;
-  height: 5vw;
+  width: 20vw;
+  height: 20vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  border: var(--border);
 }
 
 .hitbox {
   display: flex;
   justify-content: center;
   position: absolute;
-  width: 5vw;
-  height: 5vw;
+  width: 20vw;
+  height: 20vw;
   z-index: 999999;
 }
