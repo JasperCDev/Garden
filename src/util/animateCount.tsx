@@ -11,8 +11,6 @@ export function animateCount(plant: PlantObject) {
 
   let startTime: number;
 
-  console.log("life: ", life);
-
   const callback = (currentTime: number) => {
     if (startTime === undefined) {
       startTime = currentTime;
@@ -27,8 +25,7 @@ export function animateCount(plant: PlantObject) {
     life = lifeStart + diff;
     water = Math.max(waterStart - diff, 0);
 
-    console.log("this should always be the same: ", plant.life);
-    editPlant({ ...plant, water, life });
+    editPlant({ ...plant, water, life, soil_moisture: progress });
 
     if (progress !== 1) {
       return requestAnimationFrame(callback);

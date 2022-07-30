@@ -17,14 +17,23 @@ export default function PlantContainer(props: Props) {
     animateCount(props.plant);
   }
 
-  createEffect(() => console.log(props.plant));
   return (
     <div
       class={styles.soil}
-      style={{ "--border": isHovered() ? "1px solid black" : "none" }}
+      style={{
+        "--border": isHovered() ? "1px solid black" : "none",
+        "--soil-color": `hsl(27deg, 63%, ${
+          65 - props.plant.soil_moisture * 20
+        }%)`,
+      }}
     >
       {/* hitbox */}
-      <div class={styles.hitbox} onClick={waterPlant}></div>
+      <div
+        class={styles.hitbox}
+        onClick={waterPlant}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      ></div>
       <Plant plant={props.plant} />
     </div>
   );
