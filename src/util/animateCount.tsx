@@ -3,10 +3,15 @@ import { editPlant, PlantObject } from "../stores/plants.store";
 export function animateCount(plant: PlantObject) {
   let range = 600;
 
+  let lifeStart = plant.life;
+  let waterStart = plant.water;
+
   let life = plant.life;
   let water = plant.water;
 
   let startTime: number;
+
+  console.log("life: ", life);
 
   const callback = (currentTime: number) => {
     if (startTime === undefined) {
@@ -19,9 +24,10 @@ export function animateCount(plant: PlantObject) {
 
     const diff = progress * range;
 
-    life = plant.life + diff;
-    water = Math.max(plant.water - diff, 0);
+    life = lifeStart + diff;
+    water = Math.max(waterStart - diff, 0);
 
+    console.log("this should always be the same: ", plant.life);
     editPlant({ ...plant, water, life });
 
     if (progress !== 1) {
