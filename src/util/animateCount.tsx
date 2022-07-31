@@ -11,7 +11,7 @@ export function animateCount(plant: PlantObject) {
 
   let startTime: number;
 
-  const callback = (currentTime: number) => {
+  const grow: FrameRequestCallback = (currentTime) => {
     if (startTime === undefined) {
       startTime = currentTime;
     }
@@ -28,10 +28,32 @@ export function animateCount(plant: PlantObject) {
     editPlant({ ...plant, water, life, soil_moisture: progress });
 
     if (progress !== 1) {
-      return requestAnimationFrame(callback);
+      return requestAnimationFrame(grow);
     }
+
+    return fadeOutSoil(plant);
   };
 
-  // run recursive animation
+  requestAnimationFrame(grow);
+}
+
+function fadeOutSoil(plant: PlantObject) {
+  let startTime: number;
+
+  const callback: FrameRequestCallback = (currentTime) => {
+    if (startTime === undefined) {
+      startTime = currentTime;
+    }
+
+    const timePassed = currentTime - startTime;
+
+    let progress = Math.min(timePassed / 3000, 1);
+
+    editPlant({ ...plant, soil_moisture: 1 - progress });
+
+    if (progress !== 1) {
+      requestAnimationFrame(callback);
+    }
+  };
   requestAnimationFrame(callback);
 }

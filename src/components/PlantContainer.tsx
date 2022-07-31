@@ -21,7 +21,8 @@ export default function PlantContainer(props: Props) {
     <div
       class={styles.soil}
       style={{
-        "--border": isHovered() ? "1px solid black" : "none",
+        "--outline": isHovered() ? "0.2vw solid black" : "none",
+        "--cursor": props.plant.soil_moisture === 0 ? "pointer" : "auto",
         "--soil-color": `hsl(27deg, 63%, ${
           65 - props.plant.soil_moisture * 20
         }%)`,
