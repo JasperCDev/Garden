@@ -32,7 +32,7 @@
 }
 
 .leaf {
-  fill: lightgreen;
+  fill: var(--color);
 }
 
 @for $i from 1 through 8 {

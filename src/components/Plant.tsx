@@ -37,6 +37,7 @@ export default function Plant(props: Props) {
     const obj: JSX.CSSProperties = {
       "--off-set": getOffSet(props.plant.life, maxClicks, 250),
       "--stem-width": getStemWidth(props.plant.life, maxClicks),
+      "--color": props.plant.color,
     };
 
     for (const leaf in leafPoints) {
