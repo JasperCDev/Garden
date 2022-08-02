@@ -1,13 +1,10 @@
 .farmLand {
   display: grid;
   grid-template-columns: auto auto auto;
+  width: 30vw;
+  height: 30vw;
   .tile {
-    background-color: burlywood;
-    width: 20vw;
-    height: 20vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
   }
 }
 

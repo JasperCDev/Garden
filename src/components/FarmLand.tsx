@@ -8,7 +8,11 @@ export default function FarmLand() {
     <div class={styles.farmLand}>
       <For each={plants}>
         {(plant) => {
-          return <PlantContainer plant={plant} />;
+          return (
+            <div class={styles.tile}>
+              <PlantContainer plant={plant} />
+            </div>
+          );
         }}
       </For>
     </div>
