@@ -12,8 +12,6 @@ interface Props {
 export default function PlantContainer(props: Props) {
   let ref: HTMLDivElement;
   const [rect, setRect] = createSignal<DOMRect>();
-  const [top, setTop] = createSignal(0);
-  const [left, setLeft] = createSignal(0);
   const [isHovered, setIsHovered] = createSignal(false);
 
   function waterPlant() {
@@ -26,13 +24,6 @@ export default function PlantContainer(props: Props) {
 
   window.addEventListener("resize", () => {
     setRect(ref.getBoundingClientRect());
-  });
-  createEffect(() => {
-    const r = rect();
-    if (r) {
-      setTop(r.top);
-      setLeft(r.left);
-    }
   });
 
   return (
@@ -57,7 +48,9 @@ export default function PlantContainer(props: Props) {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       ></div>
+      {/* plant */}
       <Plant plant={props.plant} />
+      {/* water animation */}
       {props.plant.water > 0 && (
         <Rain
           width={window.innerWidth * 0.1} // 10vw
