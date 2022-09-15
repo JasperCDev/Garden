@@ -10,7 +10,7 @@ function getOffSet(current: number, target: number, pathlength: number) {
 
 function getStemWidth(current: number, target: number) {
   const progress = Math.min(current / target, 1);
-  return Math.max(progress * 6, 3);
+  return Math.max(progress * 6, 1);
 }
 
 const maxClicks = 3000;
@@ -42,7 +42,7 @@ export default function Plant(props: Props) {
 
     for (const leaf in leafPoints) {
       const points = leafPoints[leaf];
-      obj[`--${leaf}-scale`] = Math.min(props.plant.life / (points * 2), 1);
+      obj[`--${leaf}-scale`] = Math.min(props.plant.life / points - 1, 1);
     }
 
     return obj;
