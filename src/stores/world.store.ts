@@ -43,6 +43,7 @@ setInterval(() => {
       gameTime,
       dayTime,
       dayTimeStamp,
+      day,
     };
   });
 }, 1000);
