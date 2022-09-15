@@ -11,7 +11,8 @@ export default function App() {
   return (
     <div class={styles.App}>
       <h1 style={{ position: "absolute", top: 0 }}>
-        {Math.floor(worldStore.time.gameTime / 1000)}
+        time: {Math.round(worldStore.time.dayTime / 1000)}:00 day:{" "}
+        {worldStore.time.day}
       </h1>
       {/* <Pond /> */}
       {/* <Plant count={3000} /> */}
