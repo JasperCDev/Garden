@@ -10,7 +10,7 @@ function getOffSet(current: number, target: number, pathlength: number) {
 
 function getStemWidth(current: number, target: number) {
   const progress = Math.min(current / target, 1);
-  return Math.max(progress * 6, 1);
+  return Math.max(progress * 3, 1);
 }
 
 const maxClicks = 3000;

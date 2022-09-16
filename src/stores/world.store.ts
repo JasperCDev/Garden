@@ -9,6 +9,13 @@ interface Store {
     sessionTimeStamp: number;
     dayTimeStamp: number;
     day: number;
+    name: "morning" | "night";
+    morning: boolean;
+    night: boolean;
+  };
+  tint: {
+    opacity: number;
+    color: string;
   };
 }
 
@@ -19,6 +26,13 @@ export const [worldStore, setWorldStore] = createStore<Store>({
     sessionTimeStamp: loadTime,
     dayTimeStamp: loadTime,
     day: 1,
+    name: "morning",
+    morning: true,
+    night: false,
+  },
+  tint: {
+    opacity: 0.2,
+    color: "orange",
   },
 });
 
@@ -30,12 +44,17 @@ setInterval(() => {
     let dayTimeStamp = t.dayTimeStamp;
     let day = t.day;
 
-    let dayLength = 1000 * 10;
+    let dayLength = 1000 * 20;
 
-    if (dayTime > dayLength) {
+    if (t.dayTime >= 1000 * 10 && t.morning) {
+      setNight();
+    }
+
+    if (dayTime >= dayLength) {
       dayTime = 0.0;
       dayTimeStamp = now;
       day++;
+      setMorning();
     }
 
     return {
@@ -47,3 +66,11 @@ setInterval(() => {
     };
   });
 }, 1000);
+
+function setMorning() {
+  setWorldStore("tint", (t) => ({ ...t, opacity: 0.2, color: "orange" }));
+}
+
+function setNight() {
+  setWorldStore("tint", (t) => ({ ...t, opacity: 0.3, color: "midnightblue" }));
+}

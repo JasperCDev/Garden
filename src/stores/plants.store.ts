@@ -16,7 +16,7 @@ type Store = Plants;
 const initialState: Store = [
   {
     water: 0,
-    life: 0,
+    life: 3000,
     soil_moisture: 0,
     color: "lightgreen",
     cor: [0, 0],
