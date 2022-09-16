@@ -1,4 +1,5 @@
 import { createStore } from "solid-js/store";
+import { plants } from "./plants.store";
 
 const loadTime = Date.now();
 
@@ -17,6 +18,9 @@ interface Store {
     opacity: number;
     color: string;
   };
+  currency: {
+    value: number;
+  };
 }
 
 export const [worldStore, setWorldStore] = createStore<Store>({
@@ -33,6 +37,9 @@ export const [worldStore, setWorldStore] = createStore<Store>({
   tint: {
     opacity: 0.2,
     color: "orange",
+  },
+  currency: {
+    value: 0,
   },
 });
 
@@ -55,6 +62,7 @@ setInterval(() => {
       dayTimeStamp = now;
       day++;
       setMorning();
+      getNextCurrency();
     }
 
     return {
@@ -73,4 +81,15 @@ function setMorning() {
 
 function setNight() {
   setWorldStore("tint", (t) => ({ ...t, opacity: 0.3, color: "midnightblue" }));
+}
+
+function getNextCurrency() {
+  setWorldStore("currency", (c) => {
+    const val = plants.reduce((a, b) => a + b.life, 0);
+    console.log(val);
+    return {
+      ...c,
+      value: Math.floor(val + c.value),
+    };
+  });
 }

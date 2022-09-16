@@ -6,6 +6,7 @@ import Rain from "./components/Rain";
 import Pond from "./components/Pond";
 import FarmLand from "./components/farmLand";
 import { worldStore } from "./stores/world.store";
+import Currency from "./components/Currency";
 
 export default function App() {
   const dayNightStyles: () => JSX.CSSProperties = () => ({
@@ -31,6 +32,7 @@ export default function App() {
       {/* <Plant count={3000} /> */}
       {/* <Rain /> */}
       <FarmLand />
+      <Currency />
     </div>
   );
 }
