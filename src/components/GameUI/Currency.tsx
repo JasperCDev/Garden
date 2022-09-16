@@ -1,4 +1,4 @@
-import { worldStore } from "../stores/world.store";
+import { worldStore } from "../../stores/world.store";
 
 import styles from "./Currency.module.scss";
 

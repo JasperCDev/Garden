@@ -10,7 +10,6 @@ interface Store {
     sessionTimeStamp: number;
     dayTimeStamp: number;
     day: number;
-    name: "morning" | "night";
     morning: boolean;
     night: boolean;
   };
@@ -30,7 +29,6 @@ export const [worldStore, setWorldStore] = createStore<Store>({
     sessionTimeStamp: loadTime,
     dayTimeStamp: loadTime,
     day: 1,
-    name: "morning",
     morning: true,
     night: false,
   },
