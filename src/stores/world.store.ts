@@ -74,11 +74,11 @@ setInterval(() => {
 }, 1000);
 
 function setMorning() {
-  setWorldStore("tint", (t) => ({ ...t, opacity: 0.2, color: "orange" }));
+  setWorldStore("tint", (t) => ({ ...t, opacity: 0.2, color: "#FF9500" }));
 }
 
 function setNight() {
-  setWorldStore("tint", (t) => ({ ...t, opacity: 0.3, color: "midnightblue" }));
+  setWorldStore("tint", (t) => ({ ...t, opacity: 0.4, color: "#006AFF" }));
 }
 
 function getNextCurrency() {

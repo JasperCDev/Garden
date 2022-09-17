@@ -2,7 +2,7 @@
   // animation: sway 3s infinite ease-in-out alternate;
   // animation-delay: 3s;
   transform-origin: 50% 100%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) rotate(5deg);
   --off-set: 250;
   --stem-width: 1;
   position: relative;
