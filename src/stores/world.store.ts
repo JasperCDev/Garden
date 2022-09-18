@@ -83,8 +83,7 @@ function setNight() {
 
 function getNextCurrency() {
   setWorldStore("currency", (c) => {
-    const val = plants.reduce((a, b) => a + b.life, 0);
-    console.log(val);
+    const val = plants.plants.reduce((a, b) => a + b.life, 0);
     return {
       ...c,
       value: Math.floor(val + c.value),

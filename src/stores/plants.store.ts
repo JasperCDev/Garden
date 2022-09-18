@@ -11,88 +11,51 @@ export interface PlantObject {
 
 export type Plants = Array<PlantObject>;
 
-type Store = Plants;
+type Store = { plants: Plants; lastPlantId: number };
 
-const initialState: Store = [
-  {
-    water: 0,
-    life: 3000,
-    soil_moisture: 0,
-    color: "lightgreen",
-    cor: [0, 0],
-    id: 1,
-  },
-  {
-    water: 0,
-    life: 0,
-    soil_moisture: 0,
-    color: "lightgreen",
-    cor: [1, 0],
-    id: 2,
-  },
-  {
-    water: 0,
-    life: 0,
-    soil_moisture: 0,
-    color: "lightgreen",
-    cor: [2, 0],
-    id: 3,
-  },
-  {
-    water: 0,
-    life: 0,
-    soil_moisture: 0,
-    color: "lightgreen",
-    cor: [0, 1],
-    id: 4,
-  },
-  {
-    water: 0,
-    life: 0,
-    soil_moisture: 0,
-    color: "lightgreen",
-    cor: [1, 1],
-    id: 5,
-  },
-  {
-    water: 0,
-    life: 0,
-    soil_moisture: 0,
-    color: "lightgreen",
-    cor: [2, 1],
-    id: 6,
-  },
-  {
-    water: 0,
-    life: 0,
-    soil_moisture: 0,
-    color: "lightgreen",
-    cor: [0, 2],
-    id: 7,
-  },
-  {
-    water: 0,
-    life: 0,
-    soil_moisture: 0,
-    color: "lightgreen",
-    cor: [1, 2],
-    id: 8,
-  },
-  {
-    water: 0,
-    life: 0,
-    soil_moisture: 0,
-    color: "lightgreen",
-    cor: [2, 2],
-    id: 9,
-  },
-];
+const initialState: Store = {
+  plants: [
+    {
+      water: 0,
+      life: 3000,
+      soil_moisture: 0,
+      color: "lightgreen",
+      cor: [0, 0],
+      id: 1,
+    },
+  ],
+  lastPlantId: 1,
+};
 
 export const [plants, setPlants] = createStore<Store>(initialState);
 
 export function editPlant(newPlant: PlantObject) {
   setPlants(
+    "plants",
     (p) => p.id === newPlant.id,
     (t) => ({ ...t, ...newPlant })
   );
+}
+
+export function getPlantById(id: number) {
+  return plants.plants.find((p) => p.id === id)!;
+}
+
+export function createPlant() {
+  const newId = plants.lastPlantId + 1;
+  const newPlant: PlantObject = {
+    water: 0,
+    life: 300,
+    soil_moisture: 0,
+    color: "lightgreen",
+    cor: [0, 0],
+    id: newId,
+  };
+  //add plant
+  setPlants("plants", (p) => [...p, newPlant]);
+
+  // increment latest id
+  setPlants("lastPlantId", (id) => newId);
+
+  return newPlant.id;
 }

@@ -45,8 +45,6 @@ export function swimToFood(
   ).toFixed(2)}s linear`;
   // fish.style.transition = "transform 0.2s linear";
   fish.style.transform = `translate(${differenceX}px, ${differenceY}px) rotate(${angle}deg)`;
-  // console.log(fish.style.transform);
-  // console.log(angle);
   // fish.ontransitionend = () => {
   //   fish.style.transition = `transform ${(
   //     (distance - Math.sqrt(30 ** 2 + 30 ** 2)) /

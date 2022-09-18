@@ -1,18 +1,14 @@
-import { For } from "solid-js";
-import { plants } from "../stores/plants.store";
+import { createEffect, For } from "solid-js";
+import { farmLand } from "../stores/farmLand.store";
 import styles from "./FarmLand.module.scss";
-import PlantContainer from "./PlantContainer";
+import Tile from "./Tile";
 
 export default function FarmLand() {
   return (
     <div class={styles.farmLand}>
-      <For each={plants}>
-        {(plant) => {
-          return (
-            <div class={styles.tile}>
-              <PlantContainer plant={plant} />
-            </div>
-          );
+      <For each={farmLand.tiles}>
+        {(t) => {
+          return <Tile tile={t} />;
         }}
       </For>
     </div>
