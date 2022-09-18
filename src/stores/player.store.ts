@@ -51,6 +51,7 @@ export interface SpellBarItem {
 
 interface Store {
   spellBar: Array<SpellBarItem>;
+  selectedSpellId: number;
 }
 
 export const [playerStore, setPlayerStore] = createStore<Store>({
@@ -92,8 +93,17 @@ export const [playerStore, setPlayerStore] = createStore<Store>({
       numKey: 9,
     },
   ],
+  selectedSpellId: 1,
 });
 
-export function getSpell(id: number) {
+export function getSpellById(id: number) {
   return ALL_SPELLS.find((s) => s.id === id);
+}
+
+export function getSpellByName(name: string) {
+  return ALL_SPELLS.find((s) => s.name.toLowerCase() === name.toLowerCase())!;
+}
+
+export function setSelectedSpell(id: number) {
+  setPlayerStore("selectedSpellId", id);
 }

@@ -4,6 +4,7 @@ import { animateCount } from "../util/animateCount";
 import styles from "./PlantContainer.module.scss";
 import { createEffect, createSignal, onMount, Ref } from "solid-js";
 import Rain from "./Rain";
+import { getSpellByName, playerStore } from "../stores/player.store";
 
 interface Props {
   plant: PlantObject;
@@ -16,6 +17,9 @@ export default function PlantContainer(props: Props) {
 
   function waterPlant() {
     if (props.plant.soil_moisture !== 0) return;
+    if (playerStore.selectedSpellId !== getSpellByName("Water Plant").id) {
+      return;
+    }
     editPlant({ ...props.plant, water: 600 }); // add water
     animateCount(props.plant);
   }
