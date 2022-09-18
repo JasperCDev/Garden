@@ -1,0 +1,11 @@
+.spellBar {
+  position: absolute;
+  bottom: 0px;
+  left: 20vw;
+  background-color: lightseagreen;
+  width: 60vw;
+  display: flex;
+  flex-direction: row;
+  height: calc(60vw / 9);
+  overflow: hidden;
+}

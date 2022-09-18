@@ -1,13 +1,13 @@
-import { JSX } from "solid-js/jsx-runtime";
+import { For } from "solid-js";
+import { playerStore } from "../../stores/player.store";
+import Spell from "./Spell";
+
+import styles from "./SpellBar.module.scss";
 
 export default function SpellBar() {
-  const spellBarStyles: () => JSX.CSSProperties = () => ({
-    position: "absolute",
-    bottom: "0px",
-    padding: "2vw",
-    "background-color": "lightcoral",
-    width: "30vw",
-  });
-
-  return <div style={spellBarStyles()}>Spells</div>;
+  return (
+    <div class={styles.spellBar}>
+      <For each={playerStore.spellBar}>{(s) => <Spell spellBarItem={s} />}</For>
+    </div>
+  );
 }
