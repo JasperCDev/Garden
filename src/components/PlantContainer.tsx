@@ -38,7 +38,7 @@ export default function PlantContainer(props: Props) {
           isHovered() && props.plant.soil_moisture === 0
             ? "1px solid black"
             : "none",
-        "--cursor": props.plant.soil_moisture === 0 ? "pointer" : "not-allowed",
+        // "--cursor": props.plant.soil_moisture === 0 ? "pointer" : "not-allowed",
         "--soil-color": `hsl(27deg, 63%, ${
           65 - props.plant.soil_moisture * 20
         }%)`,
