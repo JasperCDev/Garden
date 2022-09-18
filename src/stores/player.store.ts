@@ -109,5 +109,9 @@ export function setSelectedSpell(id: number) {
 }
 
 window.addEventListener("keypress", (e) => {
+  const numKey = Number(e.key);
+  if (Number.isNaN(numKey)) return;
+  if (numKey < 1 || numKey > 9) return;
+
   setSelectedSpell(Number(e.key));
 });
