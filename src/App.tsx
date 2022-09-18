@@ -4,6 +4,7 @@ import GameUI from "./components/GameUI/GameUI";
 import DayNightTint from "./components/DayNightTint";
 import { JSX } from "solid-js";
 import { getSpellById, playerStore } from "./stores/player.store";
+import Sword from "./components/Sword";
 
 export default function App() {
   const appStyles: () => JSX.CSSProperties = () => {
@@ -16,6 +17,7 @@ export default function App() {
   };
   return (
     <div class={styles.App} style={appStyles()}>
+      <Sword />
       <GameUI />
       <DayNightTint />
       <FarmLand />
