@@ -107,3 +107,7 @@ export function getSpellByName(name: string) {
 export function setSelectedSpell(id: number) {
   setPlayerStore("selectedSpellId", id);
 }
+
+window.addEventListener("keypress", (e) => {
+  setSelectedSpell(Number(e.key));
+});
