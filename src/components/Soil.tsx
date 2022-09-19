@@ -48,7 +48,7 @@ export default function Soil(props: Props) {
     }
 
     if (playerStore.selectedSpellId === getSpellByName("SACRIFICE").id) {
-      removePlantFromTile(props.tile.id, props.tile.plantId);
+      removePlantFromTile(props.tile, plant());
       return;
     }
   }

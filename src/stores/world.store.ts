@@ -90,3 +90,10 @@ function getNextCurrency() {
     };
   });
 }
+
+export function addCurrency(val: number) {
+  setWorldStore("currency", "value", (c) => {
+    console.log(c, val);
+    return Math.floor(c + val);
+  });
+}
