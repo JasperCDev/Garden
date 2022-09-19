@@ -20,8 +20,8 @@ const initialState: Store = {
   tiles: [
     {
       id: 1,
-      plantId: 1,
-      type: "soil",
+      plantId: -1,
+      type: "grass",
     },
     {
       id: 2,

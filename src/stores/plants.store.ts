@@ -14,16 +14,7 @@ export type Plants = Array<PlantObject>;
 type Store = { plants: Plants; lastPlantId: number };
 
 const initialState: Store = {
-  plants: [
-    {
-      water: 0,
-      life: 3000,
-      soil_moisture: 0,
-      color: "lightgreen",
-      cor: [0, 0],
-      id: 1,
-    },
-  ],
+  plants: [],
   lastPlantId: 1,
 };
 

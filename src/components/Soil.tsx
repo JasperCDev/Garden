@@ -31,8 +31,6 @@ export default function Soil(props: Props) {
     createPlantOnTile(props.tile.id);
   }
 
-  function sacrificePlant() {}
-
   function handleSoilClick() {
     if (
       playerStore.selectedSpellId === getSpellByName("Water Plant").id &&

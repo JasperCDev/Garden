@@ -8,13 +8,20 @@ import Sword from "./components/Sword";
 
 export default function App() {
   const appStyles: () => JSX.CSSProperties = () => {
-    return {
-      "--cursor":
-        playerStore.selectedSpellId === getSpellById(3)!.id
-          ? "url(src/assets/droplet-solid.svg), auto"
-          : "auto",
-    };
+    switch (playerStore.selectedSpellId) {
+      case 1:
+        return { "--cursor": "url(src/assets/dirt.svg), auto" };
+      case 2:
+        return { "--cursor": "url(src/assets/plant.svg), auto" };
+      case 3:
+        return { "--cursor": "url(src/assets/droplet-solid.svg), auto" };
+      case 4:
+        return { "--cursor": "url(src/assets/kill.svg), auto" };
+      default:
+        return { "--cursor": "auto" };
+    }
   };
+
   return (
     <div class={styles.App} style={appStyles()}>
       <Sword />
