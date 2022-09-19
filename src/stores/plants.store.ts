@@ -37,8 +37,9 @@ export function editPlant(newPlant: PlantObject) {
   );
 }
 
-export function getPlantById(id: number) {
-  return plants.plants.find((p) => p.id === id)!;
+export function getPlantById(id: number): PlantObject {
+  const p = plants.plants.find((p) => p.id === id);
+  return p || defaultPlant;
 }
 
 export function createPlant() {
@@ -59,3 +60,13 @@ export function createPlant() {
 
   return newPlant.id;
 }
+
+// this is for typescript's sake...
+export const defaultPlant: PlantObject = {
+  life: 0,
+  color: "",
+  id: 0,
+  cor: [-1, -1],
+  water: 0,
+  soil_moisture: 0,
+};

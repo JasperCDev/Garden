@@ -70,11 +70,21 @@ const initialState: Store = {
 export const [farmLand, setFarmLand] = createStore<Store>(initialState);
 
 export function CreateSoilTile(id: number) {
-  const newPlantId = createPlant();
-
   setFarmLand(
     "tiles",
     (t) => t.id === id,
-    (t) => ({ ...t, type: "soil" as TileType, plantId: newPlantId })
+    (t) => ({
+      ...t,
+      type: "soil" as TileType,
+    })
+  );
+}
+
+export function createPlantOnTile(tileId: number) {
+  const id = createPlant();
+  setFarmLand(
+    "tiles",
+    (t) => t.id === tileId,
+    (t) => ({ ...t, plantId: id })
   );
 }
