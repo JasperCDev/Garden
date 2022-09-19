@@ -5,7 +5,11 @@ import styles from "./Soil.module.scss";
 import { createSignal, JSX, Show } from "solid-js";
 import Rain from "./Rain";
 import { getSpellByName, playerStore } from "../stores/player.store";
-import { createPlantOnTile, TileObject } from "../stores/farmLand.store";
+import {
+  createPlantOnTile,
+  removePlantFromTile,
+  TileObject,
+} from "../stores/farmLand.store";
 
 interface Props {
   tile: TileObject;
@@ -27,6 +31,8 @@ export default function Soil(props: Props) {
     createPlantOnTile(props.tile.id);
   }
 
+  function sacrificePlant() {}
+
   function handleSoilClick() {
     if (
       playerStore.selectedSpellId === getSpellByName("Water Plant").id &&
@@ -38,6 +44,11 @@ export default function Soil(props: Props) {
 
     if (playerStore.selectedSpellId === getSpellByName("Create Plant").id) {
       plantPlant();
+      return;
+    }
+
+    if (playerStore.selectedSpellId === getSpellByName("SACRIFICE").id) {
+      removePlantFromTile(props.tile.id, props.tile.plantId);
       return;
     }
   }

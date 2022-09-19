@@ -61,6 +61,14 @@ export function createPlant() {
   return newPlant.id;
 }
 
+export function killPlant(plantId: number) {
+  setPlants("plants", (plants) => {
+    const copy = plants.slice(0);
+    copy.filter((p) => p.id !== plantId);
+    return copy;
+  });
+}
+
 // this is for typescript's sake...
 export const defaultPlant: PlantObject = {
   life: 0,
