@@ -1,5 +1,10 @@
 import Plant from "./Plant";
-import { editPlant, getPlantById, PlantObject } from "../stores/plants.store";
+import {
+  editPlant,
+  getPlantById,
+  PlantObject,
+  waterPlant,
+} from "../stores/plants.store";
 import { animateCount } from "../util/animateCount";
 import styles from "./Soil.module.scss";
 import { createSignal, JSX, Show } from "solid-js";
@@ -19,13 +24,6 @@ export default function Soil(props: Props) {
   let ref: HTMLDivElement;
   const [isHovered, setIsHovered] = createSignal(false);
   const plant = () => getPlantById(props.tile.plantId);
-
-  function waterPlant(p: PlantObject) {
-    if (plant().soil_moisture !== 0) return;
-
-    editPlant({ ...p, water: 600 }); // add water
-    animateCount(p);
-  }
 
   function plantPlant() {
     createPlantOnTile(props.tile.id);

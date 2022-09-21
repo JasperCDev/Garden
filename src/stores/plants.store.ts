@@ -1,4 +1,6 @@
 import { createStore, produce } from "solid-js/store";
+import { animateCount } from "../util/animateCount";
+import { addCurrency } from "./world.store";
 
 export interface PlantObject {
   water: number;
@@ -58,6 +60,14 @@ export function killPlant(plantId: number) {
     copy.filter((p) => p.id !== plantId);
     return copy;
   });
+}
+
+export function waterPlant(p: PlantObject) {
+  if (p.soil_moisture !== 0) return;
+
+  editPlant({ ...p, water: 600 }); // add water
+  animateCount(p);
+  addCurrency(-500);
 }
 
 // this is for typescript's sake...

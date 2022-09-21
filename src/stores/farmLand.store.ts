@@ -1,5 +1,6 @@
 import { createStore } from "solid-js/store";
 import { createPlant, killPlant, PlantObject } from "./plants.store";
+import { setPlayerStore } from "./player.store";
 import { addCurrency } from "./world.store";
 
 type TileType = "soil" | "grass";
@@ -79,6 +80,7 @@ export function CreateSoilTile(id: number) {
       type: "soil" as TileType,
     })
   );
+  addCurrency(-30);
 }
 
 export function createPlantOnTile(tileId: number) {
@@ -88,6 +90,7 @@ export function createPlantOnTile(tileId: number) {
     (t) => t.id === tileId,
     (t) => ({ ...t, plantId: id })
   );
+  addCurrency(-500);
 }
 
 export function removePlantFromTile(tile: TileObject, plant: PlantObject) {
