@@ -1,4 +1,4 @@
-import { worldStore } from "../../stores/world.store";
+import { gameStore } from "../../stores/gameStore";
 
 export default function TimeComponent() {
   return (
@@ -10,8 +10,8 @@ export default function TimeComponent() {
         "background-color": "lightcoral",
       }}
     >
-      time: {Math.round(worldStore.time.dayTime / 1000)}:00 day:{" "}
-      {worldStore.time.day}
+      time: {Math.round(gameStore.world.time.dayTime / 1000)}:00 day:{" "}
+      {gameStore.world.time.day}
     </h1>
   );
 }

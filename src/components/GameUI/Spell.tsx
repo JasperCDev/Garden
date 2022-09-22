@@ -1,9 +1,9 @@
 import {
-  getSpellById,
-  playerStore,
-  setSelectedSpell,
   SpellBarItem,
-} from "../../stores/player.store";
+  setSelectedSpell,
+  getSpellById,
+  gameStore,
+} from "../../stores/gameStore";
 import styles from "./Spell.module.scss";
 
 interface Props {
@@ -22,7 +22,7 @@ export default function Spell(props: Props) {
       class={styles.spell}
       style={{
         border:
-          playerStore.selectedSpellId === item.spellId
+          gameStore.player.selectedSpellId === item.spellId
             ? "5px solid darkred"
             : "none",
       }}

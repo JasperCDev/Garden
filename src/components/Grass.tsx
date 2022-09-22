@@ -1,6 +1,11 @@
 import { createSignal, JSX } from "solid-js";
-import { CreateSoilTile, TileObject } from "../stores/farmLand.store";
-import { getSpellByName, playerStore } from "../stores/player.store";
+import {
+  castCreateSoil,
+  gameStore,
+  getSpellByName,
+  TileObject,
+} from "../stores/gameStore";
+
 import styles from "./Grass.module.scss";
 
 interface Props {
@@ -18,10 +23,10 @@ export default function Grass(props: Props) {
   };
 
   function handleGrassClick() {
-    if (playerStore.selectedSpellId !== getSpellByName("Create Soil").id) {
+    if (gameStore.player.selectedSpellId !== getSpellByName("Create Soil").id) {
       return;
     }
-    CreateSoilTile(props.tile.id);
+    castCreateSoil(props.tile.id);
   }
 
   return (

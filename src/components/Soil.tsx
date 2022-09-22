@@ -1,20 +1,16 @@
 import Plant from "./Plant";
-import {
-  editPlant,
-  getPlantById,
-  PlantObject,
-  waterPlant,
-} from "../stores/plants.store";
-import { animateCount } from "../util/animateCount";
 import styles from "./Soil.module.scss";
 import { createSignal, JSX, Show } from "solid-js";
 import Rain from "./Rain";
-import { getSpellByName, playerStore } from "../stores/player.store";
 import {
-  createPlantOnTile,
-  removePlantFromTile,
+  castCreatePlant,
+  castRemovePlant,
+  castWaterPlant,
+  gameStore,
+  getPlantById,
+  getSpellByName,
   TileObject,
-} from "../stores/farmLand.store";
+} from "../stores/gameStore";
 
 interface Props {
   tile: TileObject;
@@ -25,26 +21,24 @@ export default function Soil(props: Props) {
   const [isHovered, setIsHovered] = createSignal(false);
   const plant = () => getPlantById(props.tile.plantId);
 
-  function plantPlant() {
-    createPlantOnTile(props.tile.id);
-  }
-
   function handleSoilClick() {
     if (
-      playerStore.selectedSpellId === getSpellByName("Water Plant").id &&
+      gameStore.player.selectedSpellId === getSpellByName("Water Plant").id &&
       plant()
     ) {
-      waterPlant(plant());
+      castWaterPlant(plant());
       return;
     }
 
-    if (playerStore.selectedSpellId === getSpellByName("Create Plant").id) {
-      plantPlant();
+    if (
+      gameStore.player.selectedSpellId === getSpellByName("Create Plant").id
+    ) {
+      castCreatePlant(props.tile.id);
       return;
     }
 
-    if (playerStore.selectedSpellId === getSpellByName("SACRIFICE").id) {
-      removePlantFromTile(props.tile, plant());
+    if (gameStore.player.selectedSpellId === getSpellByName("SACRIFICE").id) {
+      castRemovePlant(props.tile, plant());
       return;
     }
   }

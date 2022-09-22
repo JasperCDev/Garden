@@ -1,16 +1,16 @@
 import { JSX } from "solid-js/jsx-runtime";
-import { worldStore } from "../stores/world.store";
+import { gameStore } from "../stores/gameStore";
 
 export default function DayNightTint() {
   const dayNightStyles: () => JSX.CSSProperties = () => ({
-    "background-color": worldStore.tint.color,
+    "background-color": gameStore.world.tint.color,
     position: "absolute",
     top: "0px",
     left: "0px",
     height: "100vh",
     width: "100vw",
     "z-index": 999,
-    opacity: worldStore.tint.opacity,
+    opacity: gameStore.world.tint.opacity,
     transition: "background-color 5s, opacity 5s",
   });
   return <div style={dayNightStyles()}></div>;

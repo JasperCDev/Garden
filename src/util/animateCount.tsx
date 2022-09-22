@@ -1,4 +1,4 @@
-import { editPlant, PlantObject } from "../stores/plants.store";
+import { editPlant, PlantObject } from "../stores/gameStore";
 
 export function animateCount(plant: PlantObject) {
   let range = 600;

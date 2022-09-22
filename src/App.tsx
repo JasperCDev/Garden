@@ -2,13 +2,13 @@ import styles from "./App.module.css";
 import FarmLand from "./components/farmLand";
 import GameUI from "./components/GameUI/GameUI";
 import DayNightTint from "./components/DayNightTint";
-import { JSX } from "solid-js";
-import { getSpellById, playerStore } from "./stores/player.store";
+import { JSX, onMount } from "solid-js";
 import Sword from "./components/Sword";
+import { gameStore, setSelectedSpell, tickWorldTime } from "./stores/gameStore";
 
 export default function App() {
   const appStyles: () => JSX.CSSProperties = () => {
-    switch (playerStore.selectedSpellId) {
+    switch (gameStore.player.selectedSpellId) {
       case 1:
         return { "--cursor": "url(src/assets/dirt.svg), auto" };
       case 2:
@@ -21,6 +21,17 @@ export default function App() {
         return { "--cursor": "auto" };
     }
   };
+
+  onMount(() => {
+    setInterval(tickWorldTime, 1000);
+    window.addEventListener("keypress", (e) => {
+      const numKey = Number(e.key);
+      if (Number.isNaN(numKey)) return;
+      if (numKey < 1 || numKey > 9) return;
+
+      setSelectedSpell(Number(e.key));
+    });
+  });
 
   return (
     <div class={styles.App} style={appStyles()}>

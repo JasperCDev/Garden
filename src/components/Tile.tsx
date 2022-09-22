@@ -1,4 +1,4 @@
-import { TileObject } from "../stores/farmLand.store";
+import { TileObject } from "../stores/gameStore";
 import Grass from "./Grass";
 import Soil from "./Soil";
 
