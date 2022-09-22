@@ -1,3 +1,4 @@
+import { getSpellByName } from ".";
 import {
   TileType,
   createPlant,
@@ -7,48 +8,69 @@ import {
   editPlant,
   setGameStore,
   addCurrency,
+  gameStore,
+  getSpellById,
+  Spell,
+  SpellName,
 } from "..";
 import { animateCount } from "../../../util/animateCount";
 
+function castSpell(spellName: SpellName, cb: (spell: Spell) => void) {
+  const spell = getSpellByName(spellName)!;
+  const playerMoney = gameStore.player.currency.value;
+  if (playerMoney < spell.cost) return;
+  cb(spell);
+  addCurrency(-spell.cost);
+}
+
 export function castCreateSoil(id: number) {
-  setGameStore(
-    "farmLand",
-    "tiles",
-    (t) => t.id === id,
-    (t) => ({
-      ...t,
-      type: "soil" as TileType,
-    })
-  );
-  addCurrency(-30);
+  function cast() {
+    setGameStore(
+      "farmLand",
+      "tiles",
+      (t) => t.id === id,
+      (t) => ({
+        ...t,
+        type: "soil" as TileType,
+      })
+    );
+  }
+  castSpell("Create Soil", cast);
 }
 
 export function castCreatePlant(tileId: number) {
-  const id = createPlant();
-  setGameStore(
-    "farmLand",
-    "tiles",
-    (t) => t.id === tileId,
-    (t) => ({ ...t, plantId: id })
-  );
-  addCurrency(-500);
+  function cast() {
+    const id = createPlant();
+    setGameStore(
+      "farmLand",
+      "tiles",
+      (t) => t.id === tileId,
+      (t) => ({ ...t, plantId: id })
+    );
+  }
+  castSpell("Create Plant", cast);
 }
 
 export function castRemovePlant(tile: TileObject, plant: PlantObject) {
-  killPlant(tile.plantId);
-  setGameStore(
-    "farmLand",
-    "tiles",
-    (t) => t.id === tile.id,
-    (t) => ({ ...t, plantId: -1 })
-  );
-  addCurrency(plant.life);
+  function cast() {
+    killPlant(tile.plantId);
+    setGameStore(
+      "farmLand",
+      "tiles",
+      (t) => t.id === tile.id,
+      (t) => ({ ...t, plantId: -1 })
+    );
+    addCurrency(plant.life);
+  }
+  castSpell("SACRIFICE", cast);
 }
 
 export function castWaterPlant(p: PlantObject) {
   if (p.soil_moisture !== 0) return;
 
-  editPlant({ ...p, water: 600 }); // add water
-  animateCount(p);
-  addCurrency(-500);
+  function cast() {
+    editPlant({ ...p, water: 600 }); // add water
+    animateCount(p);
+  }
+  castSpell("Water Plant", cast);
 }
