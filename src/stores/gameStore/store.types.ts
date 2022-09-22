@@ -6,9 +6,20 @@ export interface TileObject {
   type: TileType;
 }
 
+export type SpellName =
+  | "Create Soil"
+  | "Create Plant"
+  | "SACRIFICE"
+  | "Water Plant"
+  | "Create Pond"
+  | "Spawn Fish"
+  | "Feed Fish"
+  | "Lightning"
+  | "Fire";
+
 export interface Spell {
   id: number;
-  name: string;
+  name: SpellName;
   cost: number;
 }
 
