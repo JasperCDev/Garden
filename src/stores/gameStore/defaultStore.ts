@@ -145,8 +145,128 @@ const defaultStore: GameStore = {
         plantId: -1,
         type: "grass",
       },
+      {
+        id: 26,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 27,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 28,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 29,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 30,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 31,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 32,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 33,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 34,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 35,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 36,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 37,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 38,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 39,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 40,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 41,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 42,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 43,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 44,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 45,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 46,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 47,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 48,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 49,
+        plantId: -1,
+        type: "grass",
+      },
     ],
-    columns: 5,
+    columns: 7,
     size: 3,
   },
   player: {
