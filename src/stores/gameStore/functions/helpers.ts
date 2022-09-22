@@ -88,9 +88,10 @@ export function tickWorldTime() {
     let dayTimeStamp = t.dayTimeStamp;
     let day = t.day;
 
-    let dayLength = 1000 * 20;
+    let dayLength = 1000 * 60 * 5; // 5 minutes
+    let sunDown = dayLength / 2;
 
-    if (t.dayTime >= 1000 * 10 && t.morning) {
+    if (t.dayTime >= sunDown && t.morning) {
       setNight();
     }
 
@@ -127,6 +128,8 @@ export function setNight() {
     color: "#006AFF",
   }));
 }
+
+export function setNextTint() {}
 
 /* ---------------------------------------- */
 
