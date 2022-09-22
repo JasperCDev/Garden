@@ -65,9 +65,89 @@ const defaultStore: GameStore = {
         plantId: -1,
         type: "grass",
       },
+      {
+        id: 10,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 11,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 12,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 13,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 14,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 15,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 16,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 17,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 18,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 19,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 20,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 21,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 22,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 23,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 24,
+        plantId: -1,
+        type: "grass",
+      },
+      {
+        id: 25,
+        plantId: -1,
+        type: "grass",
+      },
     ],
-    columns: 3,
-    size: 1,
+    columns: 5,
+    size: 3,
   },
   player: {
     currency: {

@@ -1,6 +1,6 @@
 .farmLand {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(var(--columns), auto);
   width: 30vw;
   height: 30vw;
 }
