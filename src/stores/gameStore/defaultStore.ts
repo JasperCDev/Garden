@@ -12,6 +12,8 @@ const defaultStore: GameStore = {
       day: 1,
       morning: true,
       night: false,
+      hour: 0,
+      minute: 0,
     },
     tint: {
       opacity: 0.2,

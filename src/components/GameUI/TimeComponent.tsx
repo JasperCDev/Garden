@@ -10,7 +10,7 @@ export default function TimeComponent() {
         "background-color": "lightcoral",
       }}
     >
-      time: {Math.round(gameStore.world.time.dayTime / 1000)}:00 day:{" "}
+      time: {gameStore.world.time.hour}:{gameStore.world.time.minute} day:{" "}
       {gameStore.world.time.day}
     </h1>
   );

@@ -46,6 +46,8 @@ export interface World {
     day: number;
     morning: boolean;
     night: boolean;
+    hour: number;
+    minute: number;
   };
   tint: {
     opacity: number;

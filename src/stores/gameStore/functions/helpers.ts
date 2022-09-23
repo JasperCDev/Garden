@@ -91,6 +91,10 @@ export function tickWorldTime() {
     let dayLength = 1000 * 60 * 5; // 5 minutes
     let sunDown = dayLength / 2;
 
+    let hourLength = dayLength / 24;
+    let minuteLength = hourLength / 60;
+    let hour = Math.floor(dayTime / hourLength);
+    let minute = Math.floor((dayTime % hourLength) / minuteLength);
     if (t.dayTime >= sunDown && t.morning) {
       setNight();
     }
@@ -109,6 +113,8 @@ export function tickWorldTime() {
       dayTime,
       dayTimeStamp,
       day,
+      hour,
+      minute,
     };
   });
 }
