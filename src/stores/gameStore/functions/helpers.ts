@@ -156,3 +156,9 @@ export function getNextCurrency() {
   });
 }
 /* ---------------------------------------- */
+
+/* ------------- Tiles -------------------- */
+
+export function getTileById(id: number) {
+  return gameStore.farmLand.tiles.find((t) => t.id === id);
+}

@@ -1,4 +1,4 @@
-import { getSpellByName } from ".";
+import { getSpellByName, getTileById } from ".";
 import {
   TileType,
   createPlant,
@@ -39,6 +39,8 @@ export function castCreateSoil(id: number) {
 }
 
 export function castCreatePlant(tileId: number) {
+  const tile = getTileById(tileId);
+  if (tile?.plantId !== -1) return;
   function cast() {
     const id = createPlant();
     setGameStore(
