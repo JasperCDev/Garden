@@ -24,8 +24,8 @@ const defaultStore: GameStore = {
     tiles: [
       {
         id: 1,
-        plantId: -1,
-        type: "grass",
+        plantId: 1,
+        type: "soil",
       },
       {
         id: 2,
@@ -316,7 +316,18 @@ const defaultStore: GameStore = {
     selectedSpellId: 1,
   },
   plants: {
-    list: [],
+    list: [
+      {
+        water: 0,
+        life: 4000,
+        soil_moisture: 0,
+        color: "lightgreen",
+        cor: [0, 0],
+        id: 1,
+        level: 1,
+        yield: 300 * 0.2,
+      },
+    ],
     lastPlantId: 1,
   },
 };

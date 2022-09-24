@@ -28,13 +28,20 @@ export interface SpellBarItem {
   numKey: number;
 }
 
+export interface PlantLevelProperties {
+  yield: number;
+  requirement: number;
+}
+
 export interface PlantObject {
   water: number;
   life: number;
+  level: number;
   id: number;
   soil_moisture: number;
   color: string;
   cor: [number, number];
+  yield: number;
 }
 
 export interface World {

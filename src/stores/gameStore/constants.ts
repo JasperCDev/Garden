@@ -1,4 +1,4 @@
-import { Spell } from ".";
+import { PlantObject, Spell } from ".";
 
 export const ALL_SPELLS: Array<Spell> = [
   {
@@ -47,3 +47,20 @@ export const ALL_SPELLS: Array<Spell> = [
     cost: 5000,
   },
 ];
+
+export const PLANT_LEVELS: {
+  [key: number]: { yield: number; requirement: number };
+} = {
+  1: {
+    requirement: 300,
+    yield: 300 * 0.2,
+  },
+  2: {
+    requirement: 1500,
+    yield: 1500 * 0.2,
+  },
+  3: {
+    requirement: 4000,
+    yield: 4000 * 0.2,
+  },
+};

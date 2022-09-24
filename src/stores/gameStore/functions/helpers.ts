@@ -1,6 +1,6 @@
 import { gameStore, PlantObject, setGameStore } from "..";
 import { animateCount } from "../../../util/animateCount";
-import { ALL_SPELLS } from "../constants";
+import { ALL_SPELLS, PLANT_LEVELS } from "../constants";
 
 /* --------------- PLANTS ----------------- */
 export function editPlant(newPlant: PlantObject) {
@@ -26,6 +26,8 @@ export function createPlant() {
     color: "lightgreen",
     cor: [0, 0],
     id: newId,
+    level: 1,
+    yield: PLANT_LEVELS[1].yield,
   };
   //add plant
   setGameStore("plants", "list", (p) => [...p, newPlant]);
@@ -60,6 +62,8 @@ export const defaultPlant: PlantObject = {
   cor: [-1, -1],
   water: 0,
   soil_moisture: 0,
+  yield: 0,
+  level: 0,
 };
 
 /* ---------------------------------------- */
