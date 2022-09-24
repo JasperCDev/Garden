@@ -1,3 +1,4 @@
+import { PLANT_LEVELS } from "./constants";
 import GameStore from "./store.types";
 
 const loadTime = Date.now();
@@ -325,8 +326,8 @@ const defaultStore: GameStore = {
         color: "lightgreen",
         cor: [0, 0],
         id: 1,
-        level: 1,
-        yield: 300 * 0.2,
+        level: 3,
+        yield: PLANT_LEVELS[3].yield,
       },
     ],
     lastPlantId: 1,

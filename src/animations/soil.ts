@@ -2,17 +2,13 @@ import { editPlant, PlantObject } from "../stores/gameStore";
 
 export function animateSoil(plant: PlantObject) {
   let range = plant.water;
-
-  let lifeStart = plant.life;
   let waterStart = plant.water;
-
-  // let life = plant.life;
-  let water = plant.water;
+  let water = waterStart;
 
   let startTime: number;
   const animationLength = 1000 * 3; // 3 seconds
 
-  const grow: FrameRequestCallback = (currentTime) => {
+  const animate: FrameRequestCallback = (currentTime) => {
     if (startTime === undefined) {
       startTime = currentTime;
     }
@@ -23,29 +19,27 @@ export function animateSoil(plant: PlantObject) {
 
     const diff = progress * range;
 
-    // life = lifeStart + diff;
     water = Math.max(waterStart - diff, 0);
 
     editPlant({
       ...plant,
       water,
-      // life,
       soil_moisture: progress,
     });
 
     if (progress !== 1) {
-      return requestAnimationFrame(grow);
+      return requestAnimationFrame(animate);
     }
 
     return fadeOutSoil(plant);
   };
 
-  requestAnimationFrame(grow);
+  requestAnimationFrame(animate);
 }
 
 function fadeOutSoil(plant: PlantObject) {
   let startTime: number;
-  const animationLength = 1000 * 60 * 2; // 2 minutes
+  const animationLength = 1000; // 2 minutes
 
   const callback: FrameRequestCallback = (currentTime) => {
     if (startTime === undefined) {
