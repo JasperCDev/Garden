@@ -9,11 +9,10 @@ import {
   setGameStore,
   addCurrency,
   gameStore,
-  getSpellById,
   Spell,
   SpellName,
 } from "..";
-import { animateCount } from "../../../util/animateCount";
+import { animateSoil } from "../../../animations/soil";
 
 function castSpell(spellName: SpellName, cb: (spell: Spell) => void) {
   const spell = getSpellByName(spellName)!;
@@ -71,8 +70,8 @@ export function castWaterPlant(p: PlantObject) {
   if (p.soil_moisture !== 0) return;
 
   function cast() {
-    editPlant({ ...p, water: 600 }); // add water
-    animateCount(p);
+    editPlant({ ...p, water: 600, xp: p.xp + 600 }); // add water
+    animateSoil(p);
   }
   castSpell("Water Plant", cast);
 }

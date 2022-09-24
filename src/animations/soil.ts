@@ -1,15 +1,16 @@
 import { editPlant, PlantObject } from "../stores/gameStore";
 
-export function animateCount(plant: PlantObject) {
-  let range = 600;
+export function animateSoil(plant: PlantObject) {
+  let range = plant.water;
 
   let lifeStart = plant.life;
   let waterStart = plant.water;
 
-  let life = plant.life;
+  // let life = plant.life;
   let water = plant.water;
 
   let startTime: number;
+  const animationLength = 1000 * 3; // 3 seconds
 
   const grow: FrameRequestCallback = (currentTime) => {
     if (startTime === undefined) {
@@ -18,14 +19,19 @@ export function animateCount(plant: PlantObject) {
 
     const timePassed = currentTime - startTime;
 
-    let progress = Math.min(timePassed / 3000, 1);
+    let progress = Math.min(timePassed / animationLength, 1);
 
     const diff = progress * range;
 
-    life = lifeStart + diff;
+    // life = lifeStart + diff;
     water = Math.max(waterStart - diff, 0);
 
-    editPlant({ ...plant, water, life, soil_moisture: progress });
+    editPlant({
+      ...plant,
+      water,
+      // life,
+      soil_moisture: progress,
+    });
 
     if (progress !== 1) {
       return requestAnimationFrame(grow);
@@ -39,6 +45,7 @@ export function animateCount(plant: PlantObject) {
 
 function fadeOutSoil(plant: PlantObject) {
   let startTime: number;
+  const animationLength = 1000 * 60 * 2; // 2 minutes
 
   const callback: FrameRequestCallback = (currentTime) => {
     if (startTime === undefined) {
@@ -47,7 +54,7 @@ function fadeOutSoil(plant: PlantObject) {
 
     const timePassed = currentTime - startTime;
 
-    let progress = Math.min(timePassed / 3000, 1);
+    let progress = Math.min(timePassed / animationLength, 1);
 
     editPlant({ ...plant, soil_moisture: 1 - progress });
 

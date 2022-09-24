@@ -320,6 +320,7 @@ const defaultStore: GameStore = {
       {
         water: 0,
         life: 4000,
+        xp: 4000,
         soil_moisture: 0,
         color: "lightgreen",
         cor: [0, 0],

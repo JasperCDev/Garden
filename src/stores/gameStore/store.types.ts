@@ -42,6 +42,7 @@ export interface PlantObject {
   color: string;
   cor: [number, number];
   yield: number;
+  xp: number;
 }
 
 export interface World {

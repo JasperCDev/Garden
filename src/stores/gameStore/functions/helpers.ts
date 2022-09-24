@@ -1,5 +1,4 @@
 import { gameStore, PlantObject, setGameStore } from "..";
-import { animateCount } from "../../../util/animateCount";
 import { ALL_SPELLS, PLANT_LEVELS } from "../constants";
 
 /* --------------- PLANTS ----------------- */
@@ -28,6 +27,7 @@ export function createPlant() {
     id: newId,
     level: 1,
     yield: PLANT_LEVELS[1].yield,
+    xp: 300,
   };
   //add plant
   setGameStore("plants", "list", (p) => [...p, newPlant]);
@@ -46,14 +46,6 @@ export function killPlant(plantId: number) {
   });
 }
 
-export function waterPlant(p: PlantObject) {
-  if (p.soil_moisture !== 0) return;
-
-  editPlant({ ...p, water: 600 }); // add water
-  animateCount(p);
-  addCurrency(-500);
-}
-
 // this is for typescript's sake...
 export const defaultPlant: PlantObject = {
   life: 0,
@@ -64,6 +56,7 @@ export const defaultPlant: PlantObject = {
   soil_moisture: 0,
   yield: 0,
   level: 0,
+  xp: 0,
 };
 
 /* ---------------------------------------- */
