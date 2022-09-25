@@ -52,8 +52,8 @@ export const PLANT_LEVELS: {
   [key: number]: { yield: number; requirement: number };
 } = {
   1: {
-    requirement: 300,
-    yield: 300 * 0.2,
+    requirement: 600,
+    yield: 600 * 0.2,
   },
   2: {
     requirement: 1500,

@@ -22,14 +22,14 @@ export function createPlant() {
   const newId = gameStore.plants.lastPlantId + 1;
   const newPlant: PlantObject = {
     water: 0,
-    life: 300,
+    life: 600,
     soil_moisture: 0,
     color: "lightgreen",
     cor: [0, 0],
     id: newId,
     level: 1,
     yield: PLANT_LEVELS[1].yield,
-    xp: 300,
+    xp: 600,
   };
   //add plant
   setGameStore("plants", "list", (p) => [...p, newPlant]);
@@ -87,7 +87,7 @@ export function tickWorldTime() {
     let dayTimeStamp = t.dayTimeStamp;
     let day = t.day;
 
-    let dayLength = 1000 * 60 * 5; // 5 minutes
+    let dayLength = 1000 * 60; // 2 minutes
 
     let hourLength = dayLength / 24;
     let minuteLength = hourLength / 60;
