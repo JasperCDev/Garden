@@ -145,7 +145,7 @@ export function addCurrency(val: number) {
 
 export function getNextCurrency() {
   setGameStore("player", "currency", (c) => {
-    const val = gameStore.plants.list.reduce((a, b) => a + b.life, 0);
+    const val = gameStore.plants.list.reduce((a, b) => a + b.yield, 0);
     return {
       ...c,
       value: Math.floor(val + c.value),
