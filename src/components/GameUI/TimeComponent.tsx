@@ -1,4 +1,5 @@
 import { gameStore } from "../../stores/gameStore";
+import { formatHour } from "../../util";
 
 export default function TimeComponent() {
   return (
@@ -10,8 +11,7 @@ export default function TimeComponent() {
         "background-color": "lightcoral",
       }}
     >
-      time: {gameStore.world.time.hour}:{gameStore.world.time.minute} day:{" "}
-      {gameStore.world.time.day}
+      {formatHour(gameStore.world.time.hour)} day: {gameStore.world.time.day}
     </h1>
   );
 }
