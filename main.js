@@ -14,7 +14,7 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile("dist/index.html");
+  mainWindow.loadFile("GardenGameMain/dist/index.html");
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 };
