@@ -14,7 +14,7 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile("titleScreen.html");
+  mainWindow.loadFile("titleScreen/titleScreen.html");
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 };
