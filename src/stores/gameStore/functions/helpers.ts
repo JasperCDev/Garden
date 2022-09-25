@@ -1,4 +1,6 @@
 import { gameStore, PlantObject, setGameStore } from "..";
+import { colors } from "../../../styles";
+import { formatHour } from "../../../util";
 import { ALL_SPELLS, PLANT_LEVELS } from "../constants";
 
 /* --------------- PLANTS ----------------- */
@@ -86,21 +88,17 @@ export function tickWorldTime() {
     let day = t.day;
 
     let dayLength = 1000 * 60 * 5; // 5 minutes
-    let sunDown = dayLength / 2;
 
     let hourLength = dayLength / 24;
     let minuteLength = hourLength / 60;
     let hour = Math.floor(dayTime / hourLength);
     let minute = Math.floor((dayTime % hourLength) / minuteLength);
-    if (t.dayTime >= sunDown && t.morning) {
-      setNight();
-    }
+    setNextTint(hour);
 
     if (dayTime >= dayLength) {
       dayTime = 0.0;
       dayTimeStamp = now;
       day++;
-      setMorning();
       getNextCurrency();
     }
 
@@ -116,23 +114,17 @@ export function tickWorldTime() {
   });
 }
 
-export function setMorning() {
-  setGameStore("world", "tint", (t) => ({
-    ...t,
-    opacity: 0.2,
-    color: "#FF9500",
-  }));
-}
+export function setNextTint(hour: number) {
+  const formattedHour = formatHour(hour);
 
-export function setNight() {
+  const tint = colors.tints[formattedHour];
+  if (!tint) return;
   setGameStore("world", "tint", (t) => ({
     ...t,
     opacity: 0.4,
-    color: "#006AFF",
+    color: tint,
   }));
 }
-
-export function setNextTint() {}
 
 /* ---------------------------------------- */
 

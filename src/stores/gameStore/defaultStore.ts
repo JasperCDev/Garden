@@ -1,3 +1,4 @@
+import { colors } from "../../styles";
 import { PLANT_LEVELS } from "./constants";
 import GameStore from "./store.types";
 
@@ -17,8 +18,8 @@ const defaultStore: GameStore = {
       minute: 0,
     },
     tint: {
-      opacity: 0.2,
-      color: "orange",
+      opacity: 0.4,
+      color: colors.tints["2am"],
     },
   },
   farmLand: {
