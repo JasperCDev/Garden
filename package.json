@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/JasperCDev/Garden/issues"
   },
-  "homepage": "https://github.com/JasperCDev/Garden#readme"
+  "homepage": "https://github.com/JasperCDev/Garden#readme",
+  "devDependencies": {
+    "electron": "^20.2.0"
+  }
 }
