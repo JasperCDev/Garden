@@ -9,7 +9,7 @@ export const ALL_SPELLS: Array<Spell> = [
   {
     id: 2,
     name: "Create Plant",
-    cost: 500,
+    cost: 100,
   },
   {
     id: 3,

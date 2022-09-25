@@ -54,8 +54,8 @@ export default function Plant(props: Props) {
 
   return (
     <svg
-      width="80"
-      height="206"
+      width="150%"
+      height="150%"
       viewBox="0 0 64 240"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
