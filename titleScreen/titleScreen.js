@@ -1,11 +1,14 @@
 const fs = require("node:fs/promises");
 const fsSync = require("node:fs");
-const remote = require("electron").remote;
+const electron = require("electron");
 
+import defaultSaveData from "./defaultSaveData.js";
+
+// File System --------------------------------------------
 function createSaveFile(n) {
   fs.writeFile(
     `saveFiles/save_file_${n}.JSON`,
-    `{ "file": "content" }`,
+    JSON.stringify(defaultSaveData),
     (err) => {
       if (err) throw err;
       console.log("file saved!");
@@ -20,15 +23,20 @@ function readFile(n) {
 function fileExists(n) {
   return fsSync.existsSync(`saveFiles/save_file_${n}.json`);
 }
+// ----------------------------------------------------------
 
 function startGame(n) {
   createSaveFile(n);
+  const saveGameData = defaultSaveData;
+
+  electron.ipcRenderer.invoke("launch-game", saveGameData);
 }
 
 async function loadGame(n) {
   const content = await readFile(n);
   const saveGameData = JSON.parse(content);
-  console.log(saveGameData);
+
+  electron.ipcRenderer.invoke("launch-game", saveGameData);
 }
 
 function handleButtonClick(button, n) {
