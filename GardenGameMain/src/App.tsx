@@ -10,13 +10,15 @@ export default function App() {
   const appStyles: () => JSX.CSSProperties = () => {
     switch (gameStore.player.selectedSpellId) {
       case 1:
-        return { "--cursor": "url(src/assets/dirt.svg), auto" };
+        return { "--cursor": "url(dirt.svg), auto" };
       case 2:
-        return { "--cursor": "url(src/assets/plant.svg), auto" };
+        return {
+          "--cursor": "url(plant.svg), auto",
+        };
       case 3:
-        return { "--cursor": "url(src/assets/droplet-solid.svg), auto" };
+        return { "--cursor": "url(droplet-solid.svg), auto" };
       case 4:
-        return { "--cursor": "url(src/assets/kill.svg), auto" };
+        return { "--cursor": "url(kill.svg), auto" };
       default:
         return { "--cursor": "auto" };
     }

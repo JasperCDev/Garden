@@ -10,6 +10,4 @@ declare global {
 
 window.initialSaveData = window.initialSaveData || {};
 
-export const [gameStore, setGameStore] = createStore<GameStore>(
-  window.initialSaveData || defaultStore
-);
+export const [gameStore, setGameStore] = createStore<GameStore>(defaultStore);

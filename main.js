@@ -15,7 +15,6 @@ const createWindow = () => {
 
   ipcMain.handle("launch-game", (e, saveGameData) => {
     mainWindow.loadFile("GardenGameMain/dist/index.html");
-    window.initialSaveData = saveGameData;
   });
 
   // and load the index.html of the app.
