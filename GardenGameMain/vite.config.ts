@@ -6,5 +6,11 @@ export default defineConfig({
   build: {
     target: "esnext",
     polyfillDynamicImport: false,
+    rollupOptions: {
+      output: {
+        entryFileNames: "assets/index.js",
+        assetFileNames: "assets/index.css",
+      },
+    },
   },
 });
