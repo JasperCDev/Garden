@@ -20,6 +20,10 @@ const createWindow = () => {
     });
   });
 
+  ipcMain.handle("exit-to-title", () => {
+    mainWindow.loadFile("titleScreen/titleScreen.html");
+  });
+
   // and load the index.html of the app.
   mainWindow.loadFile("titleScreen/titleScreen.html");
   // Open the DevTools.
