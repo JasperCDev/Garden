@@ -22,6 +22,7 @@ function castSpell(spellName: SpellName, cb: (spell: Spell) => void) {
   if (playerMoney < spell.cost) return;
   cb(spell);
   addCurrency(-spell.cost);
+  window.initialSaveData = gameStore;
 }
 
 export function castCreateSoil(id: number) {

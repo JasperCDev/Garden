@@ -26,7 +26,6 @@ function fileExists(n) {
 // ----------------------------------------------------------
 
 function startGame(n) {
-  createSaveFile(n);
   const saveGameData = defaultSaveData;
 
   electron.ipcRenderer.invoke("launch-game", saveGameData);
@@ -51,7 +50,6 @@ const button_2 = document.getElementById("button_2");
 const button_3 = document.getElementById("button_3");
 
 window.addEventListener("load", () => {
-  createSaveFile(1);
   button_1.textContent = fileExists(1) ? "Continue" : "New Game";
   button_2.textContent = fileExists(2) ? "Continue" : "New Game";
   button_3.textContent = fileExists(3) ? "Continue" : "New Game";

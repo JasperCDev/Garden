@@ -1,4 +1,5 @@
 const electron = require("electron");
+const fs = require("node:fs/promises");
 
 electron.ipcRenderer.on("send-save-data", (e, saveData) => {
   window.initialSaveData = saveData;
@@ -14,4 +15,14 @@ electron.ipcRenderer.on("send-save-data", (e, saveData) => {
       electron.ipcRenderer.invoke("exit-to-title");
     }
   });
+  setInterval(() => {
+    fs.writeFile(
+      `saveFiles/save_file_${1}.JSON`,
+      JSON.stringify(window.initialSaveData),
+      (err) => {
+        if (err) throw err;
+        console.log("file saved!");
+      }
+    );
+  }, 1000);
 });
