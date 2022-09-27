@@ -5,6 +5,13 @@ import DayNightTint from "./components/DayNightTint";
 import { JSX, onMount } from "solid-js";
 import Sword from "./components/Sword";
 import { gameStore, setSelectedSpell, tickWorldTime } from "./stores/gameStore";
+import GameStore from "./stores/gameStore/store.types";
+
+declare global {
+  interface Window {
+    initialSaveData: GameStore;
+  }
+}
 
 export default function App() {
   const appStyles: () => JSX.CSSProperties = () => {

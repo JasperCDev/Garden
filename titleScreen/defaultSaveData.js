@@ -320,7 +320,7 @@ const defaultStore = {
         life: 4000,
         xp: 4000,
         soil_moisture: 0,
-        color: "lightgreen",
+        color: "red",
         cor: [0, 0],
         id: 1,
         level: 3,

@@ -15,6 +15,9 @@ const createWindow = () => {
 
   ipcMain.handle("launch-game", (e, saveGameData) => {
     mainWindow.loadFile("game.html");
+    mainWindow.webContents.on("did-finish-load", () => {
+      mainWindow.webContents.send("send-save-data", saveGameData);
+    });
   });
 
   // and load the index.html of the app.

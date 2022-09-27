@@ -1,13 +1,6 @@
 import { createStore } from "solid-js/store";
-import defaultStore from "./defaultStore";
 import GameStore from "./store.types";
 
-declare global {
-  interface Window {
-    initialSaveData: any;
-  }
-}
+const initialData = window.initialSaveData;
 
-window.initialSaveData = window.initialSaveData || {};
-
-export const [gameStore, setGameStore] = createStore<GameStore>(defaultStore);
+export const [gameStore, setGameStore] = createStore<GameStore>(initialData);
