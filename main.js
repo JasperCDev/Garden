@@ -13,10 +13,10 @@ const createWindow = () => {
     },
   });
 
-  ipcMain.handle("launch-game", (e, saveGameData) => {
+  ipcMain.handle("launch-game", (e, data) => {
     mainWindow.loadFile("game.html");
     mainWindow.webContents.on("did-finish-load", () => {
-      mainWindow.webContents.send("send-save-data", saveGameData);
+      mainWindow.webContents.send("send-save-data", data);
     });
   });
 

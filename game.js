@@ -1,8 +1,9 @@
 const electron = require("electron");
 const fs = require("node:fs/promises");
 
-electron.ipcRenderer.on("send-save-data", (e, saveData) => {
-  window.initialSaveData = saveData;
+electron.ipcRenderer.on("send-save-data", (e, data) => {
+  window.initialSaveData = data.saveGameData;
+  window.saveSlot = data.saveSlot;
 
   // run game script
   let script = document.createElement("script");
@@ -17,7 +18,7 @@ electron.ipcRenderer.on("send-save-data", (e, saveData) => {
   });
   setInterval(() => {
     fs.writeFile(
-      `saveFiles/save_file_${1}.JSON`,
+      `saveFiles/save_file_${window.saveSlot}.JSON`,
       JSON.stringify(window.initialSaveData),
       (err) => {
         if (err) throw err;

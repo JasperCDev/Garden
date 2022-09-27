@@ -28,14 +28,20 @@ function fileExists(n) {
 function startGame(n) {
   const saveGameData = defaultSaveData;
 
-  electron.ipcRenderer.invoke("launch-game", saveGameData);
+  electron.ipcRenderer.invoke("launch-game", {
+    saveGameData: saveGameData,
+    saveSlot: n,
+  });
 }
 
 async function loadGame(n) {
   const content = await readFile(n);
   const saveGameData = JSON.parse(content);
 
-  electron.ipcRenderer.invoke("launch-game", saveGameData);
+  electron.ipcRenderer.invoke("launch-game", {
+    saveGameData: saveGameData,
+    saveSlot: n,
+  });
 }
 
 function handleButtonClick(button, n) {
