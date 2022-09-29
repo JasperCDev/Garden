@@ -7,7 +7,7 @@ function editGameStore(cb: () => void) {
   window.initialSaveData = gameStore;
 }
 
-export function editPlant(newPlant: PlantObject) {
+export function editPlant(newPlant: Partial<PlantObject>) {
   function editPlantCB() {
     editGameStore(() => {
       setGameStore(

@@ -70,9 +70,9 @@ export function castWaterPlant(p: PlantObject) {
     const shouldLevelUp = p.xp >= nextLevel?.requirement;
     if (shouldLevelUp) {
       animateLevelUpPlant(p, p.level + 1);
-      editPlant({ ...p, level: p.level + 1, yield: nextLevel.yield });
+      editPlant({ level: p.level + 1, yield: nextLevel.yield });
     }
-    editPlant({ ...p, water: 600, xp: p.xp + 600 }); // add water
+    editPlant({ water: 600, xp: p.xp + 600 }); // add water
     animateSoil(p);
   }
   castSpell("Water Plant", cast);
