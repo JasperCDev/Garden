@@ -24,24 +24,23 @@ function fileExists(n) {
   return fsSync.existsSync(`saveFiles/save_file_${n}.json`);
 }
 // ----------------------------------------------------------
+function launchGame(saveGameData, n) {
+  electron.ipcRenderer.invoke("launch-game", {
+    saveGameData,
+    saveSlot: n,
+  });
+}
 
 function startGame(n) {
   const saveGameData = defaultSaveData;
-
-  electron.ipcRenderer.invoke("launch-game", {
-    saveGameData: saveGameData,
-    saveSlot: n,
-  });
+  launchGame(saveGameData, n);
 }
 
 async function loadGame(n) {
   const content = await readFile(n);
   const saveGameData = JSON.parse(content);
 
-  electron.ipcRenderer.invoke("launch-game", {
-    saveGameData: saveGameData,
-    saveSlot: n,
-  });
+  launchGame(saveGameData, n);
 }
 
 function handleButtonClick(button, n) {
