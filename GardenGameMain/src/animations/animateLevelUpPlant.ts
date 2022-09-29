@@ -9,7 +9,7 @@ export function animateLevelUpPlant(plant: PlantObject, targetLevel: number) {
     animationLength: 3000,
     callBack: (val) => {
       editPlant({
-        ...plant,
+        id: plant.id,
         life: val,
       });
     },

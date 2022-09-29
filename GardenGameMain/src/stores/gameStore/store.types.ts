@@ -82,12 +82,16 @@ export interface Plants {
   lastPlantId: number;
 }
 
-export interface AnimationConfig {
+export interface Animation {
+  name: string;
+  progress: number;
   start: number;
   end: number;
+  range: number;
+  value: number;
+  startTime: number | null;
   animationLength: number;
-  callBack: (val: number, progress: number) => void;
-  onAnimationEnd?: () => void;
+  payload: any;
 }
 
 export default interface GameStore {
@@ -95,5 +99,5 @@ export default interface GameStore {
   player: Player;
   farmLand: FarmLand;
   plants: Plants;
-  animations: Array<{}>;
+  animations: Array<Animation>;
 }

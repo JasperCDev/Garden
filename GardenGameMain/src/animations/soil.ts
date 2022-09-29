@@ -9,11 +9,10 @@ export function animateSoil(plant: PlantObject) {
     start: 0,
     end: 1,
     callBack: (val, progress) => {
-      console.log(val);
       editPlant({
-        ...plant,
         water: waterStart - waterStart * progress,
         soil_moisture: val,
+        id: plant.id,
       });
     },
     onAnimationEnd: () => fadeOutSoil(plant),
@@ -26,7 +25,7 @@ function fadeOutSoil(plant: PlantObject) {
     end: 1,
     animationLength: 1000,
     callBack: (val, progress) => {
-      editPlant({ ...plant, soil_moisture: 1 - progress });
+      editPlant({ soil_moisture: 1 - progress, id: plant.id });
     },
   });
 }

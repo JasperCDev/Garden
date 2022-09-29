@@ -13,6 +13,7 @@ import {
 } from "..";
 import { animateLevelUpPlant } from "../../../animations/animateLevelUpPlant";
 import { animateSoil } from "../../../animations/soil";
+import Plant from "../../../components/Plant";
 import { PLANT_LEVELS } from "../constants";
 
 function castSpell(spellName: SpellName, cb: (spell: Spell) => void) {
@@ -70,9 +71,9 @@ export function castWaterPlant(p: PlantObject) {
     const shouldLevelUp = p.xp >= nextLevel?.requirement;
     if (shouldLevelUp) {
       animateLevelUpPlant(p, p.level + 1);
-      editPlant({ level: p.level + 1, yield: nextLevel.yield });
+      editPlant({ level: p.level + 1, yield: nextLevel.yield, id: p.id });
     }
-    editPlant({ water: 600, xp: p.xp + 600 }); // add water
+    editPlant({ water: 600, xp: p.xp + 600, id: p.id }); // add water
     animateSoil(p);
   }
   castSpell("Water Plant", cast);

@@ -1,4 +1,10 @@
-import { gameStore, PlantObject, setGameStore, TileObject } from "..";
+import {
+  gameStore,
+  PlantObject,
+  setGameStore,
+  TileObject,
+  Animation,
+} from "..";
 import { colors } from "../../../styles";
 import { formatHour } from "../../../util";
 
@@ -7,7 +13,7 @@ function editGameStore(cb: () => void) {
   window.initialSaveData = gameStore;
 }
 
-export function editPlant(newPlant: Partial<PlantObject>) {
+export function editPlant(newPlant: Partial<PlantObject> & { id: number }) {
   function editPlantCB() {
     editGameStore(() => {
       setGameStore(
@@ -112,4 +118,12 @@ export function setNextCurrency() {
     });
   }
   editGameStore(setNextCurrencyCB);
+}
+
+export function addAnimation(newAnimation: Animation) {
+  function addAnimationCB() {
+    setGameStore("animations", (a) => [...a, newAnimation]);
+  }
+
+  editGameStore(addAnimationCB);
 }
