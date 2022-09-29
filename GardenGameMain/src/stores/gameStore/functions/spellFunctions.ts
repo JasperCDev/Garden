@@ -1,4 +1,4 @@
-import { addNewPlant, getSpellByName, getTileById } from ".";
+import { addNewPlant, editTile, getSpellByName, getTileById } from ".";
 import {
   TileType,
   TileObject,
@@ -25,15 +25,7 @@ function castSpell(spellName: SpellName, cb: (spell: Spell) => void) {
 
 export function castCreateSoil(id: number) {
   function cast() {
-    setGameStore(
-      "farmLand",
-      "tiles",
-      (t) => t.id === id,
-      (t) => ({
-        ...t,
-        type: "soil" as TileType,
-      })
-    );
+    editTile(id, { type: "soil" });
   }
   castSpell("Create Soil", cast);
 }
@@ -55,13 +47,8 @@ export function castCreatePlant(tileId: number) {
       xp: 600,
     };
 
-    addNewPlant(newPlant);
-    setGameStore(
-      "farmLand",
-      "tiles",
-      (t) => t.id === tileId,
-      (t) => ({ ...t, plantId: id })
-    );
+    addNewPlant(newPlant); // add plant
+    editTile(tileId, { plantId: id }); // add plant reference to tile
   }
   castSpell("Create Plant", cast);
 }
@@ -69,12 +56,7 @@ export function castCreatePlant(tileId: number) {
 export function castRemovePlant(tile: TileObject, plant: PlantObject) {
   function cast() {
     killPlant(tile.plantId);
-    setGameStore(
-      "farmLand",
-      "tiles",
-      (t) => t.id === tile.id,
-      (t) => ({ ...t, plantId: -1 })
-    );
+    editTile(tile.id, { plantId: -1 });
     addCurrency(plant.life);
   }
   castSpell("SACRIFICE", cast);

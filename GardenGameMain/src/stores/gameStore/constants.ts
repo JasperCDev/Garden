@@ -64,3 +64,15 @@ export const PLANT_LEVELS: {
     yield: 4000 * 0.2,
   },
 };
+
+export const DEFAULT_PLANT: PlantObject = {
+  water: 0,
+  life: 0,
+  soil_moisture: 0,
+  color: "",
+  cor: [0, 0],
+  id: -1,
+  level: -1,
+  yield: 0,
+  xp: 0,
+};

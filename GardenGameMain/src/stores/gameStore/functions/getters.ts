@@ -1,9 +1,9 @@
 import { PlantObject, gameStore } from "..";
-import { ALL_SPELLS } from "../constants";
+import { ALL_SPELLS, DEFAULT_PLANT } from "../constants";
 
 export function getPlantById(id: number): PlantObject {
   const p = gameStore.plants.list.find((p) => p.id === id);
-  return p!;
+  return p || DEFAULT_PLANT;
 }
 
 export function getSpellById(id: number) {

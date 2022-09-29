@@ -1,7 +1,6 @@
-import { gameStore, PlantObject, setGameStore } from "..";
+import { gameStore, PlantObject, setGameStore, TileObject } from "..";
 import { colors } from "../../../styles";
 import { formatHour } from "../../../util";
-import { PLANT_LEVELS } from "../constants";
 
 function editGameStore(cb: () => void) {
   cb();
@@ -20,6 +19,20 @@ export function editPlant(newPlant: PlantObject) {
     });
   }
   editGameStore(editPlantCB);
+}
+
+export function editTile(tileId: number, newTile: Partial<TileObject>) {
+  function editTileCB() {
+    editGameStore(() => {
+      setGameStore(
+        "farmLand",
+        "tiles",
+        (t) => t.id === tileId,
+        (t) => ({ ...t, ...newTile })
+      );
+    });
+  }
+  editGameStore(editTileCB);
 }
 
 export function addNewPlant(newPlant: PlantObject) {
