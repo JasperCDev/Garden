@@ -2,7 +2,8 @@ export default function animate(config: {
   start: number;
   end: number;
   animationLength: number;
-  callBack: (val: number) => void;
+  callBack: (val: number, progress: number) => void;
+  onAnimationEnd?: () => void;
 }) {
   let range = config.end - config.start;
 
@@ -19,11 +20,13 @@ export default function animate(config: {
 
     const diff = progress * range;
 
-    config.callBack(config.start + diff);
+    config.callBack(config.start + diff, progress);
 
     if (progress !== 1) {
       return requestAnimationFrame(RAFCB);
     }
+
+    if (config.onAnimationEnd) config.onAnimationEnd();
   };
 
   requestAnimationFrame(RAFCB);
