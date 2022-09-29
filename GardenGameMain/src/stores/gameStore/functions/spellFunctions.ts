@@ -1,7 +1,6 @@
-import { getSpellByName, getTileById } from ".";
+import { addNewPlant, getSpellByName, getTileById } from ".";
 import {
   TileType,
-  createPlant,
   TileObject,
   PlantObject,
   killPlant,
@@ -43,7 +42,20 @@ export function castCreatePlant(tileId: number) {
   const tile = getTileById(tileId);
   if (tile?.plantId !== -1) return;
   function cast() {
-    const id = createPlant();
+    const id = gameStore.plants.lastPlantId + 1;
+    const newPlant: PlantObject = {
+      water: 0,
+      life: 600,
+      soil_moisture: 0,
+      color: "lightgreen",
+      cor: [0, 0],
+      id,
+      level: 1,
+      yield: PLANT_LEVELS[1].yield,
+      xp: 600,
+    };
+
+    addNewPlant(newPlant);
     setGameStore(
       "farmLand",
       "tiles",
