@@ -1,3 +1,11 @@
+import {
+  addAnimation,
+  Animation,
+  deleteAnimation,
+  editPlant,
+  gameStore,
+} from "../stores/gameStore";
+
 export default function animate(config: {
   start: number;
   end: number;
@@ -32,64 +40,40 @@ export default function animate(config: {
   requestAnimationFrame(RAFCB);
 }
 
-/*
-  function step(currentTime, animation, cb) {
-    const timePassed = currentTime - startTime;
+function step(
+  currentTime: number,
+  animation: Animation,
+  cb: (newValue: number, progress: number, animation: Animation) => void
+) {
+  const startTime = animation.startTime || currentTime;
+  const timePassed = currentTime - startTime;
 
-    let progress = Math.min(timePassed / config.animationLength, 1);
+  let progress = Math.min(timePassed / animation.animationLength, 1);
 
-    const diff = progress * range;
+  const diff = progress * animation.range;
 
-    cb(animation.value + diff, progress);
-  }
+  cb(animation.start + diff, progress, animation);
+}
 
-const state = {
-  animations: [
-    {
-      name: "animate soil",
-      progress: 0.56789,
-      start: 0,
-      end: 1,
-      range: 1,
-      value: number,
-      startTime: null,
-      animationLength: 3000,
-      payload: {
-        waterStart: 600,
-        plantId: 1
+export function runGlobalAnimations() {
+  const RAFCB: FrameRequestCallback = (currentTime) => {
+    for (let i = 0; i < gameStore.animations.list.length; i++) {
+      const anim = gameStore.animations.list[i];
+      switch (anim.name) {
+        case "animate soil":
+          step(currentTime, anim, animateSoil);
       }
-    },
-    {
-      name: "level up plant",
-      progress: 0.299934,
-      start: 600,
-      end: 1500,
     }
-  ]
+    requestAnimationFrame(RAFCB);
+  };
+  requestAnimationFrame(RAFCB);
 }
 
-function RAFCB(currentTime) {
-  if (paused) {
-    return;
-  }
-  for (let i = 0; i < state.animations.length; i++) {
-    switch (animation.name) {
-      case "animate soil":
-        step(currentTime, animation, animateSoil);
-    }
-  }
-}
-
-function animateSoil(animation, newValue) {
+function animateSoil(newVal: number, progress: number, animation: Animation) {
   const { waterStart, plantId } = animation.payload;
   editPlant({
     water: waterStart - waterStart * animation.progress,
     soil_moisture: animation.value,
+    id: plantId,
   });
-  editAnimation({ value: newValue });
 }
-
-
-
-
-*/

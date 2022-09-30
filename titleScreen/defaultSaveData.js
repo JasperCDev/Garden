@@ -329,7 +329,10 @@ const defaultStore = {
     ],
     lastPlantId: 1,
   },
-  animations: [],
+  animations: {
+    list: [];
+    latestId: 0;
+  };
 };
 
 export default defaultStore;

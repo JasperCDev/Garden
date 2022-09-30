@@ -92,6 +92,7 @@ export interface Animation {
   startTime: number | null;
   animationLength: number;
   payload: any;
+  id: number;
 }
 
 export default interface GameStore {
@@ -99,5 +100,8 @@ export default interface GameStore {
   player: Player;
   farmLand: FarmLand;
   plants: Plants;
-  animations: Array<Animation>;
+  animations: {
+    list: Array<Animation>;
+    latestId: number;
+  };
 }

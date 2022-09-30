@@ -12,7 +12,7 @@ import {
   SpellName,
 } from "..";
 import { animateLevelUpPlant } from "../../../animations/animateLevelUpPlant";
-import { animateSoil } from "../../../animations/soil";
+import { createSoilAnimation } from "../../../animations/soil";
 import Plant from "../../../components/Plant";
 import { PLANT_LEVELS } from "../constants";
 
@@ -74,7 +74,7 @@ export function castWaterPlant(p: PlantObject) {
       editPlant({ level: p.level + 1, yield: nextLevel.yield, id: p.id });
     }
     editPlant({ water: 600, xp: p.xp + 600, id: p.id }); // add water
-    animateSoil(p);
+    createSoilAnimation(p);
   }
   castSpell("Water Plant", cast);
 }

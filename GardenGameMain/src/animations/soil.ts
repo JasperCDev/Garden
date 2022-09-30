@@ -1,22 +1,41 @@
-import { editPlant, PlantObject } from "../stores/gameStore";
+import {
+  addAnimation,
+  editPlant,
+  gameStore,
+  PlantObject,
+} from "../stores/gameStore";
 import animate from "./animate";
 
-export function animateSoil(plant: PlantObject) {
-  const waterStart = plant.water;
-
-  animate({
-    animationLength: 3000,
+export function createSoilAnimation(plant: PlantObject) {
+  addAnimation({
+    id: gameStore.animations.latestId + 1,
+    name: "animate soil",
+    progress: 0.56789,
     start: 0,
     end: 1,
-    callBack: (val, progress) => {
-      editPlant({
-        water: waterStart - waterStart * progress,
-        soil_moisture: val,
-        id: plant.id,
-      });
+    range: 1,
+    value: 0,
+    startTime: null,
+    animationLength: 3000,
+    payload: {
+      waterStart: 600,
+      plantId: 1,
     },
-    onAnimationEnd: () => fadeOutSoil(plant),
   });
+  // const waterStart = plant.water;
+  // animate({
+  //   animationLength: 3000,
+  //   start: 0,
+  //   end: 1,
+  //   callBack: (val, progress) => {
+  //     editPlant({
+  //       water: waterStart - waterStart * progress,
+  //       soil_moisture: val,
+  //       id: plant.id,
+  //     });
+  //   },
+  //   onAnimationEnd: () => fadeOutSoil(plant),
+  // });
 }
 
 function fadeOutSoil(plant: PlantObject) {

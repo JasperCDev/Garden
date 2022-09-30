@@ -122,8 +122,19 @@ export function setNextCurrency() {
 
 export function addAnimation(newAnimation: Animation) {
   function addAnimationCB() {
-    setGameStore("animations", (a) => [...a, newAnimation]);
+    setGameStore("animations", "list", (a) => [...a, newAnimation]);
+    setGameStore("animations", "latestId", (id) => id + 1); // increment latest id
   }
 
   editGameStore(addAnimationCB);
+}
+
+export function deleteAnimation(id: number) {
+  function deleteAnimationCB() {
+    setGameStore("animations", "list", (l) =>
+      l.filter((anim) => anim.id !== id)
+    );
+  }
+
+  editGameStore(deleteAnimationCB);
 }
