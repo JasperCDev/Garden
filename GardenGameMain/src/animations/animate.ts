@@ -2,6 +2,7 @@ import {
   addAnimation,
   Animation,
   deleteAnimation,
+  editAnimation,
   editPlant,
   gameStore,
 } from "../stores/gameStore";
@@ -51,8 +52,13 @@ function step(
   let progress = Math.min(timePassed / animation.animationLength, 1);
 
   const diff = progress * animation.range;
+  const value = animation.start + diff;
 
-  cb(animation.start + diff, progress, animation);
+  cb(value, progress, animation);
+
+  editAnimation(animation.id, { progress, value });
+
+  if (progress === 1) deleteAnimation(animation.id);
 }
 
 export function runGlobalAnimations() {

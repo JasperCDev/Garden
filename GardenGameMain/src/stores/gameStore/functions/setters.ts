@@ -5,6 +5,7 @@ import {
   TileObject,
   Animation,
 } from "..";
+import animate from "../../../animations/animate";
 import { colors } from "../../../styles";
 import { formatHour } from "../../../util";
 
@@ -137,4 +138,17 @@ export function deleteAnimation(id: number) {
   }
 
   editGameStore(deleteAnimationCB);
+}
+
+export function editAnimation(id: number, newAnim: Partial<Animation>) {
+  function editAnimationCB() {
+    setGameStore(
+      "animations",
+      "list",
+      (l) => l.id === id,
+      (anim) => ({ ...anim, newAnim })
+    );
+  }
+
+  editGameStore(editAnimationCB);
 }
