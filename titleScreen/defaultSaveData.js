@@ -330,9 +330,9 @@ const defaultStore = {
     lastPlantId: 1,
   },
   animations: {
-    list: [];
-    latestId: 0;
-  };
+    list: [],
+    latestId: 0,
+  },
 };
 
 export default defaultStore;
