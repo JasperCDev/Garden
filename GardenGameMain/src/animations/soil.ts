@@ -8,8 +8,6 @@ export function createSoilAnimation(plant: PlantObject) {
     start: 0,
     end: 1,
     range: 1,
-    value: 0,
-    startTime: null,
     duration: 10000,
     previousTimeStamp: null,
     payload: {

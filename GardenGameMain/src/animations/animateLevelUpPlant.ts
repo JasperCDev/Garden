@@ -26,8 +26,6 @@ export function animateLevelUpPlant(plant: PlantObject, targetLevel: number) {
     start: plant.life,
     end: PLANT_LEVELS[targetLevel].requirement,
     range: PLANT_LEVELS[targetLevel].requirement - plant.life,
-    value: plant.life,
-    startTime: null,
     duration: 5000,
     previousTimeStamp: null,
     payload: {

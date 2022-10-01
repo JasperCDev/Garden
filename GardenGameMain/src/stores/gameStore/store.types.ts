@@ -88,8 +88,6 @@ export interface Animation {
   start: number;
   end: number;
   range: number;
-  value: number;
-  startTime: number | null;
   previousTimeStamp: number | null;
   duration: number;
   payload: any;

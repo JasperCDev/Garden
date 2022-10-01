@@ -60,7 +60,6 @@ function step(currentTime: number, animation: Animation, cb: AnimationCB) {
 
   editAnimation(animation.id, {
     progress,
-    value,
     previousTimeStamp: currentTime,
   });
 
@@ -106,7 +105,6 @@ const animateSoil: AnimationCB = (newVal, progress, animation) => {
 };
 
 const animatePlantLevelUp: AnimationCB = (newVal, progress, animation) => {
-  console.log("new val: ", newVal);
   editPlant({
     id: animation.payload.plantId,
     life: newVal,
