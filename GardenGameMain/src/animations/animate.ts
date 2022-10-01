@@ -69,7 +69,7 @@ function step(
 }
 
 export function runGlobalAnimations() {
-  // this run on window load, we need to reset animation timeStamps if there are any
+  // this runs on window load, we need to reset animation timeStamps if there are any
   for (let i = 0; i < gameStore.animations.list.length; i++) {
     const anim = gameStore.animations.list[i];
     editAnimation(anim.id, { previousTimeStamp: null });
@@ -96,9 +96,12 @@ type AnimationCB = (
 
 const animateSoil: AnimationCB = (newVal, progress, animation) => {
   const { waterStart, plantId } = animation.payload;
+  const upValue = progress * 2;
+  const downValue = 2 - upValue;
+  const soilMoisture = progress > 0.5 ? downValue : upValue;
   editPlant({
     water: waterStart - waterStart * animation.progress,
-    soil_moisture: progress,
+    soil_moisture: soilMoisture,
     id: plantId,
   });
 };
