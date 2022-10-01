@@ -6,6 +6,12 @@ import {
   gameStore,
 } from "../stores/gameStore";
 
+type AnimationCB = (
+  newVal: number,
+  progress: number,
+  animation: Animation
+) => void;
+
 export default function animate(config: {
   start: number;
   end: number;
@@ -40,11 +46,7 @@ export default function animate(config: {
   requestAnimationFrame(RAFCB);
 }
 
-function step(
-  currentTime: number,
-  animation: Animation,
-  cb: (newValue: number, progress: number, animation: Animation) => void
-) {
+function step(currentTime: number, animation: Animation, cb: AnimationCB) {
   let currentTimePassed = animation.progress * animation.duration;
   let timeSinceLastFrame =
     currentTime - (animation.previousTimeStamp || currentTime);
@@ -80,18 +82,16 @@ export function runGlobalAnimations() {
       switch (anim.name) {
         case "animate soil":
           step(currentTime, anim, animateSoil);
+          break;
+        case "level up plant":
+          step(currentTime, anim, animatePlantLevelUp);
+          break;
       }
     }
     requestAnimationFrame(RAFCB);
   };
   requestAnimationFrame(RAFCB);
 }
-
-type AnimationCB = (
-  newVal: number,
-  progress: number,
-  animation: Animation
-) => void;
 
 const animateSoil: AnimationCB = (newVal, progress, animation) => {
   const { waterStart, plantId } = animation.payload;
@@ -102,5 +102,13 @@ const animateSoil: AnimationCB = (newVal, progress, animation) => {
     water: waterStart - waterStart * animation.progress,
     soil_moisture: soilMoisture,
     id: plantId,
+  });
+};
+
+const animatePlantLevelUp: AnimationCB = (newVal, progress, animation) => {
+  console.log("new val: ", newVal);
+  editPlant({
+    id: animation.payload.plantId,
+    life: newVal,
   });
 };
