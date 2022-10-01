@@ -10,16 +10,16 @@ export function createSoilAnimation(plant: PlantObject) {
   addAnimation({
     id: gameStore.animations.latestId + 1,
     name: "animate soil",
-    progress: 0.56789,
+    progress: 0,
     start: 0,
     end: 1,
     range: 1,
     value: 0,
     startTime: null,
-    animationLength: 3000,
+    duration: 10000,
     payload: {
       waterStart: 600,
-      plantId: 1,
+      plantId: plant.id,
     },
   });
   // const waterStart = plant.water;

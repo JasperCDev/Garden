@@ -44,11 +44,10 @@ export default function Soil(props: Props) {
   }
 
   const soilStyle: () => JSX.CSSProperties = () => {
+    console.log(plant().soil_moisture);
     return {
       "--border":
-        isHovered() && plant()!.soil_moisture === 0
-          ? "1px solid black"
-          : "none",
+        isHovered() && plant().soil_moisture === 0 ? "1px solid black" : "none",
       "--soil-color": `hsl(27deg, 63%, ${65 - plant().soil_moisture * 20}%)`,
     };
   };
@@ -65,10 +64,10 @@ export default function Soil(props: Props) {
       ></div>
       {/* plant */}
       <Show when={plant()}>
-        <Plant plant={plant()!} />
+        <Plant plant={plant()} />
       </Show>
       {/* water animation */}
-      {(plant()?.water || 0) > 0 && (
+      {(plant().water || 0) > 0 && (
         <Rain
           width={window.innerWidth * 0.1} // 10vw
           height={window.innerWidth * 0.1 * 2} // 10vw * 2

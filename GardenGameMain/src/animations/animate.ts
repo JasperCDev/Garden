@@ -46,10 +46,15 @@ function step(
   animation: Animation,
   cb: (newValue: number, progress: number, animation: Animation) => void
 ) {
-  const startTime = animation.startTime || currentTime;
-  const timePassed = currentTime - startTime;
+  // const startTime = animation.startTime || currentTime;
+  // const timePassed = currentTime - startTime;
 
-  let progress = Math.min(timePassed / animation.animationLength, 1);
+  // let progress = Math.min(timePassed / animation.animationLength, 1);
+
+  let currentTimePassed = animation.progress * animation.duration;
+  let timeSinceLastFrame = currentTime - currentTimePassed;
+  let timePassed = currentTimePassed + timeSinceLastFrame;
+  let progress = Math.min(timePassed / animation.duration, 1);
 
   const diff = progress * animation.range;
   const value = animation.start + diff;
@@ -63,6 +68,7 @@ function step(
 
 export function runGlobalAnimations() {
   const RAFCB: FrameRequestCallback = (currentTime) => {
+    console.log("ANIMATIONS LIST: ", Array.from(gameStore.animations.list));
     for (let i = 0; i < gameStore.animations.list.length; i++) {
       const anim = gameStore.animations.list[i];
       switch (anim.name) {
@@ -77,9 +83,10 @@ export function runGlobalAnimations() {
 
 function animateSoil(newVal: number, progress: number, animation: Animation) {
   const { waterStart, plantId } = animation.payload;
+  console.log("ANIMATION PROGRESS: ", progress);
   editPlant({
     water: waterStart - waterStart * animation.progress,
-    soil_moisture: animation.value,
+    soil_moisture: progress,
     id: plantId,
   });
 }

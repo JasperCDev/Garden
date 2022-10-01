@@ -6,6 +6,7 @@ import { JSX, onMount } from "solid-js";
 import Sword from "./components/Sword";
 import { gameStore, setSelectedSpell, tickWorldTime } from "./stores/gameStore";
 import GameStore from "./stores/gameStore/store.types";
+import { runGlobalAnimations } from "./animations/animate";
 
 declare global {
   interface Window {
@@ -40,6 +41,7 @@ export default function App() {
 
       setSelectedSpell(Number(e.key));
     });
+    runGlobalAnimations();
   });
 
   return (

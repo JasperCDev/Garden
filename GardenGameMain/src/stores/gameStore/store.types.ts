@@ -90,7 +90,7 @@ export interface Animation {
   range: number;
   value: number;
   startTime: number | null;
-  animationLength: number;
+  duration: number;
   payload: any;
   id: number;
 }
