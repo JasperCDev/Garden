@@ -35,7 +35,7 @@ export function createSoilAnimation(plant: PlantObject) {
 }
 
 // this should only be 1 frame, but it should happen in a RAF
-export function createTimeAnimation() {
+export function requestNextTime() {
   addAnimation({
     id: gameStore.animations.latestId + 1,
     name: "tick world time",

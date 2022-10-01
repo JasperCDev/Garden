@@ -4,9 +4,10 @@ import GameUI from "./components/GameUI/GameUI";
 import DayNightTint from "./components/DayNightTint";
 import { JSX, onMount } from "solid-js";
 import Sword from "./components/Sword";
-import { gameStore, setSelectedSpell, tickWorldTime } from "./stores/gameStore";
+import { gameStore, setSelectedSpell } from "./stores/gameStore";
 import GameStore from "./stores/gameStore/store.types";
 import { runGlobalAnimations } from "./animations/animate";
+import { requestNextTime } from "./animations";
 
 declare global {
   interface Window {
@@ -33,7 +34,7 @@ export default function App() {
   };
 
   onMount(() => {
-    setInterval(tickWorldTime, 1000);
+    setInterval(requestNextTime, 1000);
     window.addEventListener("keypress", (e) => {
       const numKey = Number(e.key);
       if (Number.isNaN(numKey)) return;
