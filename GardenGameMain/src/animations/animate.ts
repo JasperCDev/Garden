@@ -69,6 +69,12 @@ function step(
 }
 
 export function runGlobalAnimations() {
+  // this run on window load, we need to reset animation timeStamps if there are any
+  for (let i = 0; i < gameStore.animations.list.length; i++) {
+    const anim = gameStore.animations.list[i];
+    editAnimation(anim.id, { previousTimeStamp: null });
+  }
+
   const RAFCB: FrameRequestCallback = (currentTime) => {
     for (let i = 0; i < gameStore.animations.list.length; i++) {
       const anim = gameStore.animations.list[i];
