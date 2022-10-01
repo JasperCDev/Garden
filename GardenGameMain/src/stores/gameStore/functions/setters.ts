@@ -146,7 +146,7 @@ export function editAnimation(id: number, newAnim: Partial<Animation>) {
       "animations",
       "list",
       (l) => l.id === id,
-      (anim) => ({ ...anim, newAnim })
+      (anim) => ({ ...anim, ...newAnim })
     );
   }
 
