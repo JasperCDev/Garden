@@ -1,70 +1,50 @@
-type Point = { x: number; y: number };
+import { PlantObject, addAnimation, gameStore } from "../stores/gameStore";
+import { PLANT_LEVELS } from "../stores/gameStore/constants";
 
-export function swimToFood(
-  fish: HTMLDivElement,
-  fishPos: Point,
-  fishFood: Point,
-  onEnd: () => void
-) {
-  const { x: fishX, y: fishY } = fishPos;
-  const { x: foodX, y: foodY } = fishFood;
-
-  let differenceX = foodX - fishX;
-  let differenceY = foodY - fishY;
-
-  const angle = getAngle(
-    foodX - fish.getBoundingClientRect().x,
-    foodY - fish.getBoundingClientRect().y
-  );
-
-  if (differenceX > 0) {
-    differenceX -= 30;
-  } else {
-    differenceX += 30;
-  }
-
-  if (differenceY > 0) {
-    differenceY -= 30;
-  } else {
-    differenceY += 30;
-  }
-
-  const { x, y } = fish.getBoundingClientRect();
-
-  const distance = Math.sqrt(
-    Math.abs(foodX - x) ** 2 + Math.abs(foodY - y) ** 2
-  );
-
-  if (distance < 100) {
-    onEnd();
-  }
-
-  fish.style.transition = `transform ${(
-    (distance - Math.sqrt(30 ** 2 + 30 ** 2)) /
-    100
-  ).toFixed(2)}s linear`;
-  // fish.style.transition = "transform 0.2s linear";
-  fish.style.transform = `translate(${differenceX}px, ${differenceY}px) rotate(${angle}deg)`;
-  // fish.ontransitionend = () => {
-  //   fish.style.transition = `transform ${(
-  //     (distance - Math.sqrt(30 ** 2 + 30 ** 2)) /
-  //     100
-  //   ).toFixed(2)}s linear`;
-  //   fish.style.transform = `translate(${differenceX}px, ${differenceY}px) rotate(${angle}deg)`;
-  //   fish.ontransitionend = onEnd || null;
-  // };
-  fish.ontransitionend = onEnd || null;
+export function animateLevelUpPlant(plant: PlantObject, targetLevel: number) {
+  addAnimation({
+    id: gameStore.animations.latestId + 1,
+    name: "level up plant",
+    progress: 0,
+    start: plant.life,
+    end: PLANT_LEVELS[targetLevel].requirement,
+    range: PLANT_LEVELS[targetLevel].requirement - plant.life,
+    duration: 5000,
+    previousTimeStamp: null,
+    payload: {
+      plantId: plant.id,
+    },
+  });
 }
 
-export function radiansToDegrees(rad: number) {
-  return (rad * 180) / Math.PI;
+export function createSoilAnimation(plant: PlantObject) {
+  addAnimation({
+    id: gameStore.animations.latestId + 1,
+    name: "animate soil",
+    progress: 0,
+    start: 0,
+    end: 1,
+    range: 1,
+    duration: 10000,
+    previousTimeStamp: null,
+    payload: {
+      waterStart: 600,
+      plantId: plant.id,
+    },
+  });
 }
 
-export function getAngle(x: number, y: number) {
-  const rad = Math.atan2(y, x);
-  return radiansToDegrees(rad);
-}
-
-export function getLine(a: number, b: number) {
-  return Math.sqrt(a * a + b * b);
+// this should only be 1 frame, but it should happen in a RAF
+export function createTimeAnimation() {
+  addAnimation({
+    id: gameStore.animations.latestId + 1,
+    name: "tick world time",
+    progress: 0,
+    start: 0,
+    end: 1,
+    range: 1,
+    duration: 0.001, // 1 frame
+    previousTimeStamp: null,
+    payload: null,
+  });
 }
