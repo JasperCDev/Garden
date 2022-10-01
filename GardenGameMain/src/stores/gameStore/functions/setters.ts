@@ -5,7 +5,6 @@ import {
   TileObject,
   Animation,
 } from "..";
-import animate from "../../../animations/animate";
 import { colors } from "../../../styles";
 import { formatHour } from "../../../util";
 

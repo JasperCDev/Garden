@@ -15,62 +15,6 @@ type AnimationCB = (
   animation: Animation
 ) => void;
 
-export default function animate(config: {
-  start: number;
-  end: number;
-  animationLength: number;
-  callBack: (val: number, progress: number) => void;
-  onAnimationEnd?: () => void;
-}) {
-  let range = config.end - config.start;
-
-  let startTime: number;
-
-  const RAFCB: FrameRequestCallback = (currentTime) => {
-    if (startTime === undefined) {
-      startTime = currentTime;
-    }
-
-    const timePassed = currentTime - startTime;
-
-    let progress = Math.min(timePassed / config.animationLength, 1);
-
-    const diff = progress * range;
-
-    config.callBack(config.start + diff, progress);
-
-    if (progress !== 1) {
-      return requestAnimationFrame(RAFCB);
-    }
-
-    if (config.onAnimationEnd) config.onAnimationEnd();
-  };
-
-  requestAnimationFrame(RAFCB);
-}
-
-function step(currentTime: number, animation: Animation, cb: AnimationCB) {
-  let currentTimePassed = animation.progress * animation.duration;
-  let timeSinceLastFrame =
-    currentTime - (animation.previousTimeStamp || currentTime);
-  let timePassed = currentTimePassed + timeSinceLastFrame;
-  let progress = Math.min(timePassed / animation.duration, 1);
-
-  const diff = progress * animation.range;
-  const value = animation.start + diff;
-
-  cb(value, progress, animation);
-
-  editAnimation(animation.id, {
-    progress,
-    previousTimeStamp: currentTime,
-  });
-
-  if (progress === 1) {
-    deleteAnimation(animation.id);
-  }
-}
-
 export function runGlobalAnimations() {
   // this runs on window load, we need to reset animation timeStamps if there are any
   for (let i = 0; i < gameStore.animations.list.length; i++) {
@@ -97,6 +41,29 @@ export function runGlobalAnimations() {
   requestAnimationFrame(RAFCB);
 }
 
+function step(currentTime: number, animation: Animation, cb: AnimationCB) {
+  let currentTimePassed = animation.progress * animation.duration;
+  let timeSinceLastFrame =
+    currentTime - (animation.previousTimeStamp || currentTime);
+  let timePassed = currentTimePassed + timeSinceLastFrame;
+  let progress = Math.min(timePassed / animation.duration, 1);
+
+  const diff = progress * animation.range;
+  const value = animation.start + diff;
+
+  cb(value, progress, animation);
+
+  editAnimation(animation.id, {
+    progress,
+    previousTimeStamp: currentTime,
+  });
+
+  if (progress === 1) {
+    deleteAnimation(animation.id);
+  }
+}
+
+// animation functions ---------------------------------------------------------
 const animateSoil: AnimationCB = (newVal, progress, animation) => {
   const { waterStart, plantId } = animation.payload;
   const upValue = progress * 2;
