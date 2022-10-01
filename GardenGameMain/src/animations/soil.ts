@@ -1,10 +1,4 @@
-import {
-  addAnimation,
-  editPlant,
-  gameStore,
-  PlantObject,
-} from "../stores/gameStore";
-import animate from "./animate";
+import { addAnimation, gameStore, PlantObject } from "../stores/gameStore";
 
 export function createSoilAnimation(plant: PlantObject) {
   addAnimation({
@@ -17,34 +11,28 @@ export function createSoilAnimation(plant: PlantObject) {
     value: 0,
     startTime: null,
     duration: 10000,
+    previousTimeStamp: null,
     payload: {
       waterStart: 600,
       plantId: plant.id,
     },
   });
-  // const waterStart = plant.water;
-  // animate({
-  //   animationLength: 3000,
-  //   start: 0,
-  //   end: 1,
-  //   callBack: (val, progress) => {
-  //     editPlant({
-  //       water: waterStart - waterStart * progress,
-  //       soil_moisture: val,
-  //       id: plant.id,
-  //     });
-  //   },
-  //   onAnimationEnd: () => fadeOutSoil(plant),
-  // });
 }
 
-function fadeOutSoil(plant: PlantObject) {
-  animate({
+export function createFadeOutSoil(plant: PlantObject) {
+  addAnimation({
+    id: gameStore.animations.latestId + 1,
+    name: "fade out soil",
+    progress: 0,
     start: 0,
     end: 1,
-    animationLength: 1000,
-    callBack: (val, progress) => {
-      editPlant({ soil_moisture: 1 - progress, id: plant.id });
+    range: 1,
+    value: 0,
+    startTime: null,
+    duration: 10000,
+    previousTimeStamp: null,
+    payload: {
+      plantId: plant.id,
     },
   });
 }

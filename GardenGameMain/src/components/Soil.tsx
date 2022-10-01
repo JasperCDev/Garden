@@ -44,7 +44,7 @@ export default function Soil(props: Props) {
   }
 
   const soilStyle: () => JSX.CSSProperties = () => {
-    console.log(plant().soil_moisture);
+    console.log("SOIL MOISTURE: ", plant().soil_moisture);
     return {
       "--border":
         isHovered() && plant().soil_moisture === 0 ? "1px solid black" : "none",
