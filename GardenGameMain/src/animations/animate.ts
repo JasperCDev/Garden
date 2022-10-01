@@ -63,7 +63,6 @@ function step(
   });
 
   if (progress === 1) {
-    console.log("DELETE ANIMATION");
     deleteAnimation(animation.id);
   }
 }
