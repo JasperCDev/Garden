@@ -1,9 +1,9 @@
-import { gameStore } from "../stores/gameStore";
 interface Time {
   day: number;
   hour: number;
   minute: number;
 }
+
 export function formatHour(h: number) {
   if (h === 0) {
     return "12";
@@ -40,10 +40,12 @@ export function getTimeFromFrameCount(frameCount: number): Time {
   const framesInADay = 60 * 60 * 5; // 5 minutes
   const framesInAnHour = framesInADay / 24;
   const framesInAQuarterHour = framesInAnHour / 4;
-  const day = floor(frameCount / framesInADay);
+
+  const day = floor(frameCount / framesInADay) + 1;
   const hour = floor((frameCount % framesInADay) / framesInAnHour);
   const minute =
     floor((frameCount % framesInAnHour) / framesInAQuarterHour) * 15;
+
   return {
     day,
     hour,

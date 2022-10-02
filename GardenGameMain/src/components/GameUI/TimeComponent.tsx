@@ -2,7 +2,7 @@ import { gameStore } from "../../stores/gameStore";
 import { formatTime, getTimeFromFrameCount } from "../../util";
 
 export default function TimeComponent() {
-  const time = () => gameStore.world.time;
+  const time = () => getTimeFromFrameCount(gameStore.frameCount);
   return (
     <h1
       style={{
@@ -12,8 +12,7 @@ export default function TimeComponent() {
         "background-color": "lightcoral",
       }}
     >
-      {formatTime(getTimeFromFrameCount(gameStore.frameCount))} day:{" "}
-      {gameStore.world.time.day}
+      {formatTime(time())}
     </h1>
   );
 }
