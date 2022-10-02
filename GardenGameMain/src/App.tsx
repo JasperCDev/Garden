@@ -35,7 +35,6 @@ export default function App() {
 
   onMount(() => {
     setInterval(() => {
-      console.log("tick");
       requestNextTime();
     }, 1000);
     window.addEventListener("keypress", (e) => {

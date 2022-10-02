@@ -4,6 +4,7 @@ import {
   editAnimation,
   editPlant,
   gameStore,
+  incrementFrameCount,
   setNewTime,
   setNextCurrency,
   setNextTint,
@@ -23,10 +24,8 @@ export function runGlobalAnimations() {
   }
 
   const RAFCB: FrameRequestCallback = (currentTime) => {
-    console.log(
-      "this should never be more than one: ",
-      gameStore.animations.list.length
-    );
+    incrementFrameCount();
+
     for (let i = 0; i < gameStore.animations.list.length; i++) {
       const anim = gameStore.animations.list[i];
       switch (anim.name) {

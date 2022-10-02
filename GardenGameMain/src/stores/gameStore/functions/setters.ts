@@ -151,3 +151,11 @@ export function editAnimation(id: number, newAnim: Partial<Animation>) {
 
   editGameStore(editAnimationCB);
 }
+
+export function incrementFrameCount() {
+  function incrementFrameCountCB() {
+    setGameStore("frameCount", (c) => c + 1);
+  }
+
+  editGameStore(incrementFrameCountCB);
+}

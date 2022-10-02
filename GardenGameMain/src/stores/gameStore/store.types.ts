@@ -103,4 +103,5 @@ export default interface GameStore {
     list: Array<Animation>;
     latestId: number;
   };
+  frameCount: number;
 }

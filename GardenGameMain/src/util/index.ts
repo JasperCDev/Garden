@@ -1,3 +1,9 @@
+import { gameStore } from "../stores/gameStore";
+interface Time {
+  day: number;
+  hour: number;
+  minute: number;
+}
 export function formatHour(h: number) {
   if (h === 0) {
     return "12";
@@ -21,9 +27,26 @@ export function getDayPeriod(hour: number) {
   return "pm";
 }
 
-export function formatTime(day: number, hour: number, minute: number) {
-  const formattedMinute = formatMinute(minute);
-  const formattedHour = formatHour(hour);
-  const dayPeriod = getDayPeriod(hour);
-  return `${formattedHour}: ${formattedMinute}${dayPeriod} Day ${day}`;
+export function formatTime(time: Time) {
+  const formattedMinute = formatMinute(time.minute);
+  const formattedHour = formatHour(time.hour);
+  const dayPeriod = getDayPeriod(time.hour);
+  return `${formattedHour}: ${formattedMinute}${dayPeriod} Day ${time.day}`;
+}
+
+export function getTimeFromFrameCount(frameCount: number): Time {
+  const floor = Math.floor;
+
+  const framesInADay = 60 * 60 * 5; // 5 minutes
+  const framesInAnHour = framesInADay / 24;
+  const framesInAQuarterHour = framesInAnHour / 4;
+  const day = floor(frameCount / framesInADay);
+  const hour = floor((frameCount % framesInADay) / framesInAnHour);
+  const minute =
+    floor((frameCount % framesInAnHour) / framesInAQuarterHour) * 15;
+  return {
+    day,
+    hour,
+    minute,
+  };
 }

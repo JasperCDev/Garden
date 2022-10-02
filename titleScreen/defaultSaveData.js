@@ -333,6 +333,7 @@ const defaultStore = {
     list: [],
     latestId: 0,
   },
+  frameCount: 0,
 };
 
 export default defaultStore;
