@@ -9,6 +9,7 @@ import {
   setNextCurrency,
   setNextTint,
 } from "../stores/gameStore";
+import { getTimeFromFrameCount } from "../util";
 
 type AnimationCB = (
   newVal: number,
@@ -24,7 +25,10 @@ export function runGlobalAnimations() {
   }
 
   const RAFCB: FrameRequestCallback = (currentTime) => {
+    // these always need to run
     incrementFrameCount();
+    tickWorldTime();
+    // ------------------------
 
     for (let i = 0; i < gameStore.animations.list.length; i++) {
       const anim = gameStore.animations.list[i];
@@ -36,11 +40,9 @@ export function runGlobalAnimations() {
           step(currentTime, anim, animatePlantLevelUp);
           break;
         case "tick world time":
-          console.log("this should run once per second");
           step(currentTime, anim, tickWorldTime);
           break;
         default:
-          console.log("ok what the heck");
       }
     }
     requestAnimationFrame(RAFCB);
@@ -91,23 +93,11 @@ const animatePlantLevelUp: AnimationCB = (newVal, progress, animation) => {
 };
 
 export function tickWorldTime() {
-  const currentTime = gameStore.world.time;
-
-  let day = currentTime.day;
-  let hour = currentTime.hour;
-  let minute = currentTime.minute + 15;
-
-  if (minute === 60) {
-    minute = 0;
-    hour++;
-  }
-  if (hour === 25) {
-    day++;
-    hour = 0;
-    minute = 0;
+  const time = getTimeFromFrameCount(gameStore.frameCount);
+  if (time.hour === 24) {
     setNextCurrency();
   }
 
-  setNextTint(hour);
-  setNewTime({ day, hour, minute });
+  setNextTint(time.hour);
+  setNewTime(time);
 }

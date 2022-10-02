@@ -33,18 +33,3 @@ export function createSoilAnimation(plant: PlantObject) {
     },
   });
 }
-
-// this should only be 1 frame, but it should happen in a RAF
-export function requestNextTime() {
-  addAnimation({
-    id: gameStore.animations.latestId + 1,
-    name: "tick world time",
-    progress: 1, // 1 frame
-    start: 0,
-    end: 1,
-    range: 1,
-    duration: 0.001, // 1 frame
-    previousTimeStamp: null,
-    payload: null,
-  });
-}

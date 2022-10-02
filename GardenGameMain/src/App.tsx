@@ -7,7 +7,6 @@ import Sword from "./components/Sword";
 import { gameStore, setSelectedSpell } from "./stores/gameStore";
 import GameStore from "./stores/gameStore/store.types";
 import { runGlobalAnimations } from "./animations/animate";
-import { requestNextTime } from "./animations";
 
 declare global {
   interface Window {
@@ -34,9 +33,6 @@ export default function App() {
   };
 
   onMount(() => {
-    setInterval(() => {
-      requestNextTime();
-    }, 1000);
     window.addEventListener("keypress", (e) => {
       const numKey = Number(e.key);
       if (Number.isNaN(numKey)) return;
@@ -44,6 +40,7 @@ export default function App() {
 
       setSelectedSpell(Number(e.key));
     });
+
     runGlobalAnimations();
   });
 

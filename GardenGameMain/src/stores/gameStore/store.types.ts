@@ -45,18 +45,14 @@ export interface PlantObject {
   xp: number;
 }
 
+export interface Time {
+  day: number;
+  hour: number;
+  minute: number;
+}
+
 export interface World {
-  time: {
-    gameTime: number;
-    dayTime: number;
-    sessionTimeStamp: number;
-    dayTimeStamp: number;
-    day: number;
-    morning: boolean;
-    night: boolean;
-    hour: number;
-    minute: number;
-  };
+  time: Time;
   tint: {
     opacity: number;
     color: string;

@@ -2,7 +2,7 @@ import { gameStore } from "../../stores/gameStore";
 import { formatTime, getTimeFromFrameCount } from "../../util";
 
 export default function TimeComponent() {
-  const time = () => getTimeFromFrameCount(gameStore.frameCount);
+  const time = () => gameStore.world.time;
   return (
     <h1
       style={{

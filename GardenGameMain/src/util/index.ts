@@ -1,8 +1,4 @@
-interface Time {
-  day: number;
-  hour: number;
-  minute: number;
-}
+import { Time } from "../stores/gameStore";
 
 export function formatHour(h: number) {
   if (h === 0) {
