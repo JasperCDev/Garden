@@ -34,7 +34,10 @@ export default function App() {
   };
 
   onMount(() => {
-    setInterval(requestNextTime, 1000);
+    setInterval(() => {
+      console.log("tick");
+      requestNextTime();
+    }, 1000);
     window.addEventListener("keypress", (e) => {
       const numKey = Number(e.key);
       if (Number.isNaN(numKey)) return;

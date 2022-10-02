@@ -70,9 +70,9 @@ export function setSelectedSpell(id: number) {
   editGameStore(setSelectedSpellCB);
 }
 
-export function setNewTime(newTime: typeof gameStore.world.time) {
+export function setNewTime(newTime: Partial<typeof gameStore.world.time>) {
   function setNewTimeCB() {
-    setGameStore("world", "time", (t) => newTime);
+    setGameStore("world", "time", (t) => ({ ...t, ...newTime }));
   }
   editGameStore(setNewTimeCB);
 }

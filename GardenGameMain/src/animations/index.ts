@@ -39,7 +39,7 @@ export function requestNextTime() {
   addAnimation({
     id: gameStore.animations.latestId + 1,
     name: "tick world time",
-    progress: 0,
+    progress: 1, // 1 frame
     start: 0,
     end: 1,
     range: 1,

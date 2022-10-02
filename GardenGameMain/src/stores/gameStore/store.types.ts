@@ -83,7 +83,7 @@ export interface Plants {
 }
 
 export interface Animation {
-  name: string;
+  name: "animate soil" | "level up plant" | "tick world time";
   progress: number;
   start: number;
   end: number;

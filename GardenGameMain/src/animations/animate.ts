@@ -23,6 +23,10 @@ export function runGlobalAnimations() {
   }
 
   const RAFCB: FrameRequestCallback = (currentTime) => {
+    console.log(
+      "this should never be more than one: ",
+      gameStore.animations.list.length
+    );
     for (let i = 0; i < gameStore.animations.list.length; i++) {
       const anim = gameStore.animations.list[i];
       switch (anim.name) {
@@ -33,7 +37,11 @@ export function runGlobalAnimations() {
           step(currentTime, anim, animatePlantLevelUp);
           break;
         case "tick world time":
+          console.log("this should run once per second");
           step(currentTime, anim, tickWorldTime);
+          break;
+        default:
+          console.log("ok what the heck");
       }
     }
     requestAnimationFrame(RAFCB);
@@ -85,35 +93,22 @@ const animatePlantLevelUp: AnimationCB = (newVal, progress, animation) => {
 
 export function tickWorldTime() {
   const currentTime = gameStore.world.time;
-  const now = Date.now();
-  let gameTime = now - currentTime.sessionTimeStamp;
-  let dayTime = now - currentTime.dayTimeStamp;
-  let dayTimeStamp = currentTime.dayTimeStamp;
+
   let day = currentTime.day;
+  let hour = currentTime.hour;
+  let minute = currentTime.minute + 15;
 
-  let dayLength = 1000 * 60; // 2 minutes
-
-  let hourLength = dayLength / 24;
-  let minuteLength = hourLength / 60;
-  let hour = Math.floor(dayTime / hourLength);
-  let minute = Math.floor((dayTime % hourLength) / minuteLength);
-  setNextTint(hour);
-
-  if (dayTime >= dayLength) {
-    dayTime = 0.0;
-    dayTimeStamp = now;
+  if (minute === 60) {
+    minute = 0;
+    hour++;
+  }
+  if (hour === 25) {
     day++;
+    hour = 0;
+    minute = 0;
     setNextCurrency();
   }
 
-  const newTime = {
-    ...currentTime,
-    gameTime,
-    dayTime,
-    dayTimeStamp,
-    day,
-    hour,
-    minute,
-  };
-  setNewTime(newTime);
+  setNextTint(hour);
+  setNewTime({ day, hour, minute });
 }
