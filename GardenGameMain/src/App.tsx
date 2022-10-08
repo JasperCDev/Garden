@@ -24,10 +24,6 @@ export default function App() {
   const appStyles: () => JSX.CSSProperties = () => {
     let cursor = "auto";
     let opacity = gameStore.paused ? 0.7 : 1;
-    const styles = {
-      "--cursor": cursor,
-      "--opacity": opacity,
-    };
     switch (gameStore.player.selectedSpellId) {
       case 1:
         cursor = "url(dirt.svg), auto";
@@ -42,7 +38,10 @@ export default function App() {
         cursor = "url(kill.svg), auto";
         break;
     }
-    return styles;
+    return {
+      "--cursor": cursor,
+      "--opacity": opacity,
+    };
   };
 
   onMount(() => {
