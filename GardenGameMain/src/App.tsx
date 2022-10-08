@@ -16,6 +16,7 @@ import { runGlobalAnimations } from "./animations/animate";
 declare global {
   interface Window {
     initialSaveData: GameStore;
+    gameEvents: { pauseEvent: Event; resumeEvent: Event };
   }
 }
 
@@ -48,7 +49,13 @@ export default function App() {
       if (!Number.isNaN(numKey)) handleNumKeyPress(numKey);
 
       if (e.key === "p") {
-        gameStore.paused ? resumeGame() : pauseGame();
+        if (gameStore.paused) {
+          resumeGame();
+          window.dispatchEvent(window.gameEvents.resumeEvent);
+        } else {
+          pauseGame();
+          window.dispatchEvent(window.gameEvents.pauseEvent);
+        }
       }
     });
 

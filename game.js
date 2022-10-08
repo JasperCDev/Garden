@@ -17,6 +17,27 @@ function registerListeners() {
   });
 }
 
+function handlePause() {
+  console.log("game.js pause!");
+}
+
+function handleResume() {
+  console.log("game.js resume!");
+}
+
+function initGameEvents() {
+  // these are meant for communication between the render process (this file) and the vite application (game code)
+  const pauseEvent = new Event("pause");
+  const resumeEvent = new Event("resume");
+  window.gameEvents = {
+    pauseEvent,
+    resumeEvent,
+  };
+
+  window.addEventListener("pause", handlePause);
+  window.addEventListener("resume", handleResume);
+}
+
 function registerSaveInterval() {
   setInterval(() => {
     fs.writeFile(
@@ -33,7 +54,7 @@ function registerSaveInterval() {
 electron.ipcRenderer.on("send-save-data", (e, data) => {
   window.initialSaveData = data.saveGameData;
   window.saveSlot = data.saveSlot;
-
-  loadGameScript();
+  initGameEvents();
   registerListeners();
+  loadGameScript();
 });
