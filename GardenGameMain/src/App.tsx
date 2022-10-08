@@ -12,6 +12,7 @@ import {
 } from "./stores/gameStore";
 import GameStore from "./stores/gameStore/store.types";
 import { runGlobalAnimations } from "./animations/animate";
+import Stage from "./PIXI/stage";
 
 declare global {
   interface Window {
@@ -74,6 +75,7 @@ export default function App() {
       <GameUI />
       <DayNightTint />
       <FarmLand />
+      <Stage />
     </div>
   );
 }
