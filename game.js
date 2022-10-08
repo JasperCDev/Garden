@@ -1,5 +1,6 @@
 const electron = require("electron");
 const fs = require("node:fs/promises");
+const pauseDiv = document.getElementById("pause");
 
 function loadGameScript() {
   const script = document.createElement("script");
@@ -18,11 +19,11 @@ function registerListeners() {
 }
 
 function handlePause() {
-  console.log("game.js pause!");
+  pauseDiv.style.visibility = "visible";
 }
 
 function handleResume() {
-  console.log("game.js resume!");
+  pauseDiv.style.visibility = "hidden";
 }
 
 function initGameEvents() {

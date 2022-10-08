@@ -6,4 +6,5 @@
   flex-direction: column;
   background-color: white;
   cursor: var(--cursor);
+  opacity: var(--opacity);
 }

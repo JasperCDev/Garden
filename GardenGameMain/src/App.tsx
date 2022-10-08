@@ -22,20 +22,27 @@ declare global {
 
 export default function App() {
   const appStyles: () => JSX.CSSProperties = () => {
+    let cursor = "auto";
+    let opacity = gameStore.paused ? 0.7 : 1;
+    const styles = {
+      "--cursor": cursor,
+      "--opacity": opacity,
+    };
     switch (gameStore.player.selectedSpellId) {
       case 1:
-        return { "--cursor": "url(dirt.svg), auto" };
+        cursor = "url(dirt.svg), auto";
+        break;
       case 2:
-        return {
-          "--cursor": "url(plant.svg), auto",
-        };
+        cursor = "url(plant.svg), auto";
+        break;
       case 3:
-        return { "--cursor": "url(droplet-solid.svg), auto" };
+        cursor = "url(droplet-solid.svg), auto";
+        break;
       case 4:
-        return { "--cursor": "url(kill.svg), auto" };
-      default:
-        return { "--cursor": "auto" };
+        cursor = "url(kill.svg), auto";
+        break;
     }
+    return styles;
   };
 
   onMount(() => {
