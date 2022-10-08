@@ -25,6 +25,7 @@ export function runGlobalAnimations() {
   }
 
   const RAFCB: FrameRequestCallback = (currentTime) => {
+    if (gameStore.paused) return requestAnimationFrame(RAFCB); // short circuit on pause!
     // these always need to run
     incrementFrameCount();
     tickWorldTime();

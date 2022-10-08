@@ -4,7 +4,12 @@ import GameUI from "./components/GameUI/GameUI";
 import DayNightTint from "./components/DayNightTint";
 import { JSX, onMount } from "solid-js";
 import Sword from "./components/Sword";
-import { gameStore, setSelectedSpell } from "./stores/gameStore";
+import {
+  gameStore,
+  pauseGame,
+  resumeGame,
+  setSelectedSpell,
+} from "./stores/gameStore";
 import GameStore from "./stores/gameStore/store.types";
 import { runGlobalAnimations } from "./animations/animate";
 
@@ -33,12 +38,18 @@ export default function App() {
   };
 
   onMount(() => {
-    window.addEventListener("keypress", (e) => {
-      const numKey = Number(e.key);
-      if (Number.isNaN(numKey)) return;
+    function handleNumKeyPress(numKey: number) {
       if (numKey < 1 || numKey > 9) return;
 
-      setSelectedSpell(Number(e.key));
+      setSelectedSpell(numKey);
+    }
+    window.addEventListener("keypress", (e) => {
+      const numKey = Number(e.key);
+      if (!Number.isNaN(numKey)) handleNumKeyPress(numKey);
+
+      if (e.key === "p") {
+        gameStore.paused ? resumeGame() : pauseGame();
+      }
     });
 
     runGlobalAnimations();

@@ -159,3 +159,23 @@ export function incrementFrameCount() {
 
   editGameStore(incrementFrameCountCB);
 }
+
+export function pauseGame() {
+  function pauseGameCB() {
+    setGameStore("paused", true);
+  }
+
+  editGameStore(pauseGameCB);
+}
+
+export function resumeGame() {
+  function resumeGameCB() {
+    for (let i = 0; i < gameStore.animations.list.length; i++) {
+      const anim = gameStore.animations.list[i];
+      editAnimation(anim.id, { previousTimeStamp: null });
+    }
+    setGameStore("paused", false);
+  }
+
+  editGameStore(resumeGameCB);
+}

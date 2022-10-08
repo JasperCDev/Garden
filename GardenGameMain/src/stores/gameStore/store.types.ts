@@ -100,4 +100,5 @@ export default interface GameStore {
     latestId: number;
   };
   frameCount: number;
+  paused: boolean;
 }
