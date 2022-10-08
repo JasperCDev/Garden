@@ -3,13 +3,7 @@ const loadTime = Date.now();
 const defaultStore = {
   world: {
     time: {
-      gameTime: 0.0,
-      dayTime: 0.0,
-      sessionTimeStamp: loadTime,
-      dayTimeStamp: loadTime,
       day: 1,
-      morning: true,
-      night: false,
       hour: 0,
       minute: 0,
     },
@@ -320,7 +314,7 @@ const defaultStore = {
         life: 4000,
         xp: 4000,
         soil_moisture: 0,
-        color: "red",
+        color: "black",
         cor: [0, 0],
         id: 1,
         level: 3,
@@ -334,6 +328,7 @@ const defaultStore = {
     latestId: 0,
   },
   frameCount: 0,
+  paused: false,
 };
 
 export default defaultStore;
