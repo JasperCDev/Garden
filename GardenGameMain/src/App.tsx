@@ -12,7 +12,7 @@ import {
 } from "./stores/gameStore";
 import GameStore from "./stores/gameStore/store.types";
 import { runGlobalAnimations } from "./animations/animate";
-import Stage from "./PIXI/stage";
+import Stage from "./PIXI/Stage";
 import Graphics from "./PIXI/Graphics";
 
 declare global {
