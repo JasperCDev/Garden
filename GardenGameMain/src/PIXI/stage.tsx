@@ -18,7 +18,7 @@ export default function Stage(props: Props) {
       resolution: window.devicePixelRatio || 1,
     });
 
-    app.stage.addChild(props.children as unknown as PIXI.DisplayObject);
+    app.stage.addChild(props.children);
   });
   return canvas;
 }
