@@ -4,7 +4,7 @@ import { Loader } from "@pixi/loaders";
 import { JSXElement, onMount } from "solid-js";
 
 interface Props {
-  children: PIXI.DisplayObject;
+  children: Array<PIXI.DisplayObject>;
 }
 
 export default function Stage(props: Props) {
@@ -18,7 +18,9 @@ export default function Stage(props: Props) {
       resolution: window.devicePixelRatio || 1,
     });
 
-    app.stage.addChild(props.children);
+    for (let i = 0; i < props.children.length; i++) {
+      app.stage.addChild(props.children[i]);
+    }
   });
   return canvas;
 }

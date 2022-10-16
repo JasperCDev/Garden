@@ -14,6 +14,8 @@ import GameStore from "./stores/gameStore/store.types";
 import { runGlobalAnimations } from "./animations/animate";
 import Stage from "./PIXI/Stage";
 import Graphics from "./PIXI/Graphics";
+import Sprite from "./PIXI/Sprite";
+import * as PIXI from "pixi.js";
 
 declare global {
   interface Window {
@@ -70,13 +72,22 @@ export default function App() {
     runGlobalAnimations();
   });
 
+  const texture = PIXI.Texture.from(
+    "GardenGameMain/public/assets/plantPNG.png"
+  );
+
+  const setSprite = (sprite: PIXI.Sprite) => {
+    sprite.width = 600;
+    sprite.height = 600;
+  };
+
   return (
     <div class={styles.App} style={appStyles()}>
       <Sword />
       <GameUI />
       <DayNightTint />
       <FarmLand />
-      <Stage>{Graphics()}</Stage>
+      <Stage>{[Graphics(), Sprite(setSprite, texture)]}</Stage>
     </div>
   );
 }
