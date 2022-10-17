@@ -1,3 +1,4 @@
+import * as PIXI from "pixi.js";
 export type TileType = "soil" | "grass";
 
 export interface TileObject {
@@ -101,4 +102,5 @@ export default interface GameStore {
   };
   frameCount: number;
   paused: boolean;
+  pixiApp: PIXI.Application;
 }

@@ -1,26 +1,22 @@
 import * as PIXI from "pixi.js";
 import { Application } from "@pixi/app";
-import { Loader } from "@pixi/loaders";
 import { JSXElement, onMount } from "solid-js";
+import { gameStore, initPIXI } from "../stores/gameStore";
 
 interface Props {
-  children: Array<PIXI.DisplayObject>;
+  children: JSXElement | Array<JSXElement>;
 }
 
 export default function Stage(props: Props) {
-  const canvas = <canvas></canvas>;
+  const canvas = <canvas>{gameStore.pixiApp ? props.children : null}</canvas>; // only load children after pixiApp has been initialized in store
   onMount(() => {
     const app = new Application({
-      width: 800,
-      height: 600,
+      resizeTo: window,
       view: canvas as HTMLCanvasElement,
       backgroundColor: 0x1099bb,
       resolution: window.devicePixelRatio || 1,
     });
-
-    for (let i = 0; i < props.children.length; i++) {
-      app.stage.addChild(props.children[i]);
-    }
+    initPIXI(app);
   });
   return canvas;
 }

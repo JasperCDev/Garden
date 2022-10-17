@@ -1,3 +1,4 @@
+import { PixelExtractOptions } from "@pixi/extract";
 import {
   gameStore,
   PlantObject,
@@ -7,6 +8,7 @@ import {
 } from "..";
 import { colors } from "../../../styles";
 import { formatHour } from "../../../util";
+import * as PIXI from "pixi.js";
 
 function editGameStore(cb: () => void) {
   cb();
@@ -178,4 +180,12 @@ export function resumeGame() {
   }
 
   editGameStore(resumeGameCB);
+}
+
+export function initPIXI(app: PIXI.Application) {
+  function initPIXICB() {
+    setGameStore("pixiApp", app);
+  }
+
+  editGameStore(initPIXICB);
 }

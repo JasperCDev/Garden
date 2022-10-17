@@ -1,5 +1,6 @@
+//@ts-nocheck
 /* @refresh reload */
-import { render } from "solid-js/web";
+import { render } from "../solid-canvas";
 
 import "./index.css";
 import App from "./App";

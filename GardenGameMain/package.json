@@ -8,7 +8,7 @@
     "start": "vite",
     "start:electron": "electron .",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --watch",
     "serve": "vite preview"
   },
   "license": "MIT",

@@ -329,6 +329,7 @@ const defaultStore = {
   },
   frameCount: 0,
   paused: false,
+  pixiApp: null,
 };
 
 export default defaultStore;
