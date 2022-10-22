@@ -1,10 +1,13 @@
 import * as PIXI from "pixi.js";
 
-export default function Sprite(
-  set: (sprite: PIXI.Sprite) => void,
-  texture?: PIXI.Texture<PIXI.Resource>
-) {
-  const sprite = new PIXI.Sprite(texture);
+interface Props {
+  set?: (sprite: PIXI.Sprite) => void;
+  texture?: PIXI.Texture<PIXI.Resource>;
+}
+
+export default function Sprite(props: Props) {
+  const sprite = new PIXI.Sprite(props.texture);
   sprite.anchor.set(0.5);
+  if (props.set) props.set(sprite);
   return sprite;
 }
