@@ -1,9 +1,6 @@
-// @ts-nocheck
-// example custom dom renderer
 import * as PIXI from "pixi.js";
 import { JSXElement } from "solid-js";
 import { createRenderer } from "solid-js/universal";
-import App from "./src/App";
 import { gameStore } from "./src/stores/gameStore";
 
 const PROPERTIES = new Set(["className", "textContent"]);
@@ -29,11 +26,11 @@ export const {
   },
   createTextNode(value) {
     console.log("createTextNode: ", value);
-    // return document.createTextNode(value);
+    return new PIXI.Text(value);
   },
   replaceText(textNode, value) {
     console.log("replaceText: ", textNode, value);
-    // textNode.data = value;
+    textNode.data = value;
   },
   setProperty(node, name, value) {
     console.log("setProperty: ", node, name, value);
@@ -44,21 +41,8 @@ export const {
   },
   insertNode(parent, node, anchor) {
     console.log("insertNode: ", parent, node, anchor);
-    // insert canvas elem
-    if (node instanceof HTMLElement) {
-      const rootDiv = parent as HTMLElement;
-      rootDiv.insertBefore(node as HTMLElement, anchor as unknown as Node);
-      return;
-    }
-    // insert direct child of canvas
-    if (parent instanceof HTMLCanvasElement) {
-      const app = gameStore.pixiApp;
-      app.stage.addChild(node as PIXI.DisplayObject);
-      return;
-    }
-    // add Container child
-    const container = parent as PIXI.Container;
-    container.addChild(node as PIXI.DisplayObject);
+    if (parent.tagName === "CANVAS")
+      return gameStore.pixiApp.stage.addChild(node);
   },
   isTextNode(node) {
     console.log("isTextNode: ", node);
@@ -78,7 +62,7 @@ export const {
   },
   getNextSibling(node) {
     console.log("getNextSibling: ", node);
-    // return node.nextSibling;
+    return node.nextSibling;
   },
 });
 
