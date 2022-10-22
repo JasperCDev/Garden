@@ -6,7 +6,6 @@ interface Props {
 }
 
 export default function Container(props: Props) {
-  console.log("CHILDREN: ", typeof props.children);
   const container = new PIXI.Container();
   if (typeof props.children === "object") {
     container.addChild(props.children);

@@ -33,6 +33,7 @@ function launchGame(saveGameData, n) {
 
 function startGame(n) {
   const saveGameData = defaultSaveData;
+  createSaveFile(n);
   launchGame(saveGameData, n);
 }
 
