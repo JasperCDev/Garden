@@ -1,3 +1,4 @@
+import { onCleanup } from "solid-js";
 import {
   Animation,
   deleteAnimation,
@@ -48,7 +49,8 @@ export function runGlobalAnimations() {
     }
     requestAnimationFrame(RAFCB);
   };
-  requestAnimationFrame(RAFCB);
+  const handle = requestAnimationFrame(RAFCB);
+  onCleanup(() => cancelAnimationFrame(handle));
 }
 
 function step(currentTime: number, animation: Animation, cb: AnimationCB) {
