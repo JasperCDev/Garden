@@ -16,7 +16,7 @@ import { runGlobalAnimations } from "./animations/animate";
 import Graphics from "./PIXI/Graphics";
 import Sprite from "./PIXI/Sprite";
 import * as PIXI from "pixi.js";
-import { Container, DisplayObject } from "pixi.js";
+import Container from "./PIXI/Container";
 
 declare global {
   interface Window {
@@ -85,18 +85,20 @@ export default function App() {
   });
 
   return (
-    <For each={gameStore.farmLand.tiles}>
-      {(tile, i) => {
-        return (
-          <Graphics
-            draw={(g) => {
-              g.beginFill(0xffffff);
-              g.drawCircle(i() * 10, i() * 10, 10);
-              g.endFill();
-            }}
-          />
-        );
-      }}
-    </For>
+    <Container>
+      <For each={new Array(1000)}>
+        {(tile, i) => {
+          return (
+            <Graphics
+              draw={(g) => {
+                g.beginFill(0xffffff);
+                g.drawCircle(i() * 5, i() * 5, 1);
+                g.endFill();
+              }}
+            />
+          );
+        }}
+      </For>
+    </Container>
   );
 }
