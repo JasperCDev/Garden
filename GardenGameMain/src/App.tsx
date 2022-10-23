@@ -17,6 +17,7 @@ import Graphics from "./PIXI/Graphics";
 import Sprite from "./PIXI/Sprite";
 import * as PIXI from "pixi.js";
 import Container from "./PIXI/Container";
+import Grass from "./PIXI/Grass";
 
 declare global {
   interface Window {
@@ -86,17 +87,9 @@ export default function App() {
 
   return (
     <Container>
-      <For each={new Array(1000)}>
+      <For each={gameStore.farmLand.tiles}>
         {(tile, i) => {
-          return (
-            <Graphics
-              draw={(g) => {
-                g.beginFill(0xffffff);
-                g.drawCircle(i() * 5, i() * 5, 1);
-                g.endFill();
-              }}
-            />
-          );
+          return <Grass tile={tile} index={i()} />;
         }}
       </For>
     </Container>
