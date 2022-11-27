@@ -1,7 +1,6 @@
 import Plant from "./Plant";
 import styles from "./Soil.module.scss";
 import { createSignal, JSX, Show } from "solid-js";
-import Rain from "./Rain";
 import {
   castCreatePlant,
   castRemovePlant,
@@ -65,15 +64,6 @@ export default function Soil(props: Props) {
       <Show when={plant()}>
         <Plant plant={plant()} />
       </Show>
-      {/* water animation */}
-      {(plant().water || 0) > 0 && (
-        <Rain
-          width={window.innerWidth * 0.1} // 10vw
-          height={window.innerWidth * 0.1 * 2} // 10vw * 2
-          top={`${-(window.innerWidth * 0.1)}px`}
-          left="0px"
-        />
-      )}
     </div>
   );
 }
