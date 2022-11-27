@@ -9,7 +9,7 @@ import {
   getPlantById,
   getSpellByName,
   TileObject,
-} from "../stores/gameStore";
+} from "stores/gameStore";
 
 interface Props {
   tile: TileObject;

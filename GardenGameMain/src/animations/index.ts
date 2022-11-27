@@ -1,5 +1,5 @@
-import { PlantObject, addAnimation, gameStore } from "../stores/gameStore";
-import { PLANT_LEVELS } from "../stores/gameStore/constants";
+import { PlantObject, addAnimation, gameStore } from "stores/gameStore";
+import { PLANT_LEVELS } from "stores/gameStore/constants";
 
 export function animateLevelUpPlant(plant: PlantObject, targetLevel: number) {
   addAnimation({

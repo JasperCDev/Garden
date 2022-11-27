@@ -10,8 +10,7 @@ import {
   setNextCurrency,
   setNextTint,
 } from "../stores/gameStore";
-import { colors } from "../styles";
-import { formatHour, getTimeFromFrameCount } from "../util";
+import { getTimeFromFrameCount } from "utils";
 
 type AnimationCB = (
   newVal: number,

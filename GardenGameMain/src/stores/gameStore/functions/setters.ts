@@ -5,7 +5,7 @@ import {
   TileObject,
   Animation,
 } from "..";
-import { colors } from "../../../styles";
+import { colors } from "styles";
 
 import * as PIXI from "pixi.js";
 

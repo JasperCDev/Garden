@@ -1,5 +1,5 @@
-import { gameStore } from "../../stores/gameStore";
-import { formatTime, getTimeFromFrameCount } from "../../util";
+import { gameStore } from "stores/gameStore";
+import { formatTime } from "utils";
 
 export default function TimeComponent() {
   const time = () => gameStore.world.time;

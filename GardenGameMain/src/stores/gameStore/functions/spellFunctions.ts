@@ -1,18 +1,16 @@
 import { addNewPlant, editTile, getSpellByName, getTileById } from ".";
 import {
-  TileType,
   TileObject,
   PlantObject,
   killPlant,
   editPlant,
-  setGameStore,
   addCurrency,
   gameStore,
   Spell,
   SpellName,
 } from "..";
-import { animateLevelUpPlant } from "../../../animations";
-import { createSoilAnimation } from "../../../animations";
+import { animateLevelUpPlant } from "animations";
+import { createSoilAnimation } from "animations";
 import { PLANT_LEVELS } from "../constants";
 
 function castSpell(spellName: SpellName, cb: (spell: Spell) => void) {
