@@ -1,5 +1,5 @@
 import { For } from "solid-js";
-import { gameStore } from "stores/gameStore";
+import { gameStore } from "@/stores/gameStore";
 import Spell from "./Spell";
 
 import styles from "./SpellBar.module.scss";

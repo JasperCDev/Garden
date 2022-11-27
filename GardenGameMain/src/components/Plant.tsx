@@ -1,6 +1,6 @@
 import { createEffect, createSignal } from "solid-js";
 import { JSX } from "solid-js/jsx-runtime";
-import { PlantObject } from "stores/gameStore";
+import { PlantObject } from "@/stores/gameStore";
 import styles from "./Plant.module.scss";
 
 function getOffSet(current: number, target: number, pathlength: number) {

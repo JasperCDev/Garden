@@ -3,7 +3,7 @@ import {
   setSelectedSpell,
   getSpellById,
   gameStore,
-} from "stores/gameStore";
+} from "@/stores/gameStore";
 import styles from "./Spell.module.scss";
 
 interface Props {

@@ -1,5 +1,5 @@
 import { For, JSX } from "solid-js";
-import { gameStore } from "stores/gameStore";
+import { gameStore } from "@/stores/gameStore";
 import styles from "./FarmLand.module.scss";
 import Tile from "./Tile";
 

@@ -1,5 +1,5 @@
 import { JSX } from "solid-js/jsx-runtime";
-import { gameStore } from "stores/gameStore";
+import { gameStore } from "@/stores/gameStore";
 
 export default function DayNightTint() {
   const dayNightStyles: () => JSX.CSSProperties = () => ({

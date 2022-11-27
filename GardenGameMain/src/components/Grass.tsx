@@ -4,7 +4,7 @@ import {
   gameStore,
   getSpellByName,
   TileObject,
-} from "stores/gameStore";
+} from "@/stores/gameStore";
 
 import styles from "./Grass.module.scss";
 
