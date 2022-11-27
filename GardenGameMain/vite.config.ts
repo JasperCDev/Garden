@@ -6,15 +6,6 @@ export default defineConfig({
     solidPlugin({
       solid: {
         moduleName: "solid-js/web",
-        // @ts-ignore
-        generate: "dynamic",
-        renderers: [
-          {
-            name: "universal",
-            moduleName: "/solid-canvas.ts",
-            elements: [],
-          },
-        ],
       },
     }),
   ],
