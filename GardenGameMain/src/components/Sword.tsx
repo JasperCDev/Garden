@@ -1,3 +1,5 @@
+import styles from "./Sword.module.scss";
+
 export default function Sword() {
   return (
     <svg
@@ -6,6 +8,7 @@ export default function Sword() {
       height="10vh"
       viewBox="0 0 122 415"
       fill="none"
+      class={styles.sword}
     >
       <rect x="45" y="121" width="32" height="250" rx="5" fill="#AEACAC" />
       <rect x="45" width="32" height="121" rx="14" fill="#AA4700" />

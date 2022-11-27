@@ -284,26 +284,6 @@ const defaultStore = {
         spellId: 4,
         numKey: 4,
       },
-      {
-        spellId: 5,
-        numKey: 5,
-      },
-      {
-        spellId: 6,
-        numKey: 6,
-      },
-      {
-        spellId: 7,
-        numKey: 7,
-      },
-      {
-        spellId: 8,
-        numKey: 8,
-      },
-      {
-        spellId: 9,
-        numKey: 9,
-      },
     ],
     selectedSpellId: 1,
   },

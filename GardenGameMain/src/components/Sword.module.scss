@@ -1,0 +1,12 @@
+.sword {
+  animation: bounce 1s linear infinite alternate-reverse;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-30px);
+  }
+}

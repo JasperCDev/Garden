@@ -10,7 +10,8 @@ import {
   setNextCurrency,
   setNextTint,
 } from "../stores/gameStore";
-import { getTimeFromFrameCount } from "../util";
+import { colors } from "../styles";
+import { formatHour, getTimeFromFrameCount } from "../util";
 
 type AnimationCB = (
   newVal: number,
@@ -100,7 +101,6 @@ export function tickWorldTime() {
   if (time.hour === 24) {
     setNextCurrency();
   }
-
   setNextTint(time.hour);
   setNewTime(time);
 }

@@ -1,4 +1,3 @@
-import { PixelExtractOptions } from "@pixi/extract";
 import {
   gameStore,
   PlantObject,
@@ -7,7 +6,7 @@ import {
   Animation,
 } from "..";
 import { colors } from "../../../styles";
-import { formatHour } from "../../../util";
+
 import * as PIXI from "pixi.js";
 
 function editGameStore(cb: () => void) {
@@ -93,9 +92,7 @@ export function setWorldTint(tint: string) {
 }
 
 export function setNextTint(hour: number) {
-  const formattedHour = formatHour(hour);
-
-  const tint = colors.tints[formattedHour];
+  const tint = colors.tints[hour];
   if (!tint) return;
   setWorldTint(tint);
 }
