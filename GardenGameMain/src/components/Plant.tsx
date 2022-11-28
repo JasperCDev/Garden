@@ -1,4 +1,3 @@
-import { createEffect, createSignal } from "solid-js";
 import { JSX } from "solid-js/jsx-runtime";
 import { PlantObject } from "@/stores/gameStore";
 import styles from "./Plant.module.scss";
@@ -31,8 +30,6 @@ interface Props {
 }
 
 export default function Plant(props: Props) {
-  const [plantCustomProperties, setPlantCustomProperties] = createSignal({});
-
   function createCSS() {
     const obj: JSX.CSSProperties = {
       "--off-set": getOffSet(props.plant.life, maxClicks, 250),
@@ -48,9 +45,7 @@ export default function Plant(props: Props) {
     return obj;
   }
 
-  createEffect(() => {
-    setPlantCustomProperties(createCSS());
-  });
+  const plantCustomProperties = () => createCSS();
 
   return (
     <svg

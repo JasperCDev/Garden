@@ -57,5 +57,6 @@ electron.ipcRenderer.on("send-save-data", (e, data) => {
   window.saveSlot = data.saveSlot;
   initGameEvents();
   registerListeners();
+  registerSaveInterval();
   loadGameScript();
 });
