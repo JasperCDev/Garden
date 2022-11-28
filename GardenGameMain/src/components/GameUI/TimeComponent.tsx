@@ -1,18 +1,8 @@
 import { gameStore } from "@/stores/gameStore";
 import { formatTime } from "@/utils";
+import styles from "./TimeComponent.module.scss";
 
 export default function TimeComponent() {
   const time = () => gameStore.world.time;
-  return (
-    <h1
-      style={{
-        position: "absolute",
-        top: 0,
-        padding: "1vw",
-        "background-color": "lightcoral",
-      }}
-    >
-      {formatTime(time())}
-    </h1>
-  );
+  return <h1 class={styles.timeComponent}>{formatTime(time())}</h1>;
 }

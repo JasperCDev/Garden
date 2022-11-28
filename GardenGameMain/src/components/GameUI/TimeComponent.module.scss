@@ -1,0 +1,11 @@
+@use "@/styles/variables" as v;
+
+.timeComponent {
+  position: absolute;
+  top: 0;
+  padding: 1rem;
+  min-width: 300px;
+  text-align: center;
+  background-color: v.$primary-background;
+  color: v.$text-color;
+}
