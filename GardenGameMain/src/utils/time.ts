@@ -29,12 +29,12 @@ export function formatTime(time: Time) {
   return `${formattedHour}: ${formattedMinute}${dayPeriod} Day ${time.day}`;
 }
 
+export const framesInADay = 60 * 60 * 1; // 1 minute
+export const framesInAnHour = framesInADay / 24;
+export const framesInAQuarterHour = framesInAnHour / 4;
+
 export function getTimeFromFrameCount(frameCount: number): Time {
   const floor = Math.floor;
-
-  const framesInADay = 60 * 60 * 1; // 1 minute
-  const framesInAnHour = framesInADay / 24;
-  const framesInAQuarterHour = framesInAnHour / 4;
 
   const day = floor(frameCount / framesInADay) + 1;
   const hour = floor((frameCount % framesInADay) / framesInAnHour);

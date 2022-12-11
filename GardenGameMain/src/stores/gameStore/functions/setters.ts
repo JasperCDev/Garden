@@ -7,8 +7,6 @@ import {
 } from "..";
 import { colors } from "@/styles";
 
-import * as PIXI from "pixi.js";
-
 function editGameStore(cb: () => void) {
   cb();
   window.initialSaveData = gameStore;
@@ -179,10 +177,10 @@ export function resumeGame() {
   editGameStore(resumeGameCB);
 }
 
-export function initPIXI(app: PIXI.Application) {
-  function initPIXICB() {
-    setGameStore("pixiApp", app);
+export function setIsDayEnd(isOver: boolean = true) {
+  function setIsDayOverCB() {
+    setGameStore("world", "isDayEnd", isOver);
   }
 
-  editGameStore(initPIXICB);
+  editGameStore(setIsDayOverCB);
 }

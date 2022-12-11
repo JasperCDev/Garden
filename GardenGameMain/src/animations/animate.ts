@@ -6,11 +6,11 @@ import {
   editPlant,
   gameStore,
   incrementFrameCount,
+  setIsDayEnd,
   setNewTime,
-  setNextCurrency,
   setNextTint,
-} from "../stores/gameStore";
-import { getTimeFromFrameCount } from "@/utils";
+} from "@/stores/gameStore";
+import { framesInADay, getTimeFromFrameCount } from "@/utils";
 
 type AnimationCB = (
   newVal: number,
@@ -26,7 +26,9 @@ export function runGlobalAnimations() {
   }
 
   const RAFCB: FrameRequestCallback = (currentTime) => {
-    if (gameStore.paused) return requestAnimationFrame(RAFCB); // short circuit on pause!
+    if (gameStore.paused || gameStore.world.isDayEnd) {
+      return requestAnimationFrame(RAFCB); // short circuit on pause!
+    }
     // these always need to run
     incrementFrameCount();
     tickWorldTime();
@@ -97,8 +99,8 @@ const animatePlantLevelUp: AnimationCB = (newVal, progress, animation) => {
 
 export function tickWorldTime() {
   const time = getTimeFromFrameCount(gameStore.frameCount);
-  if (time.hour === 24) {
-    setNextCurrency();
+  if (gameStore.frameCount % framesInADay === 0) {
+    setIsDayEnd(true);
   }
   setNextTint(time.hour);
   setNewTime(time);

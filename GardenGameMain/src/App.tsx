@@ -12,6 +12,7 @@ import {
 } from "./stores/gameStore";
 import GameStore from "./stores/gameStore/store.types";
 import { runGlobalAnimations } from "./animations/animate";
+import DayOver from "@/components/DayOver";
 
 declare global {
   interface Window {
@@ -22,22 +23,23 @@ declare global {
 
 export default function App() {
   const appStyles: () => JSX.CSSProperties = () => {
-    let cursor = "auto";
-    let opacity = gameStore.paused ? 0.7 : 1;
-    switch (gameStore.player.selectedSpellId) {
-      case 1:
-        cursor = "url(dirt.svg), auto";
-        break;
-      case 2:
-        cursor = "url(plant.svg), auto";
-        break;
-      case 3:
-        cursor = "url(droplet-solid.svg), auto";
-        break;
-      case 4:
-        cursor = "url(kill.svg), auto";
-        break;
+    function getCursor() {
+      if (gameStore.world.isDayEnd) return "auto";
+      switch (gameStore.player.selectedSpellId) {
+        case 1:
+          return "url(dirt.svg), auto";
+        case 2:
+          return "url(plant.svg), auto";
+        case 3:
+          return "url(droplet-solid.svg), auto";
+        case 4:
+          return "url(kill.svg), auto";
+        default:
+          return "auto";
+      }
     }
+    let cursor = getCursor();
+    let opacity = gameStore.paused ? 0.7 : 1;
     return {
       "--cursor": cursor,
       "--opacity": opacity,
@@ -74,6 +76,7 @@ export default function App() {
       <GameUI />
       <DayNightTint />
       <FarmLand />
+      {gameStore.world.isDayEnd && <DayOver />}
     </div>
   );
 }

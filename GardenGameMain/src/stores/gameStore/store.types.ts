@@ -58,6 +58,9 @@ export interface World {
     opacity: number;
     color: string;
   };
+  isDayEnd: boolean;
+  isDayStart: boolean;
+  paused: boolean;
 }
 
 export interface Player {
