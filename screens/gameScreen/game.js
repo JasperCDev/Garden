@@ -4,7 +4,7 @@ const pauseDiv = document.getElementById("pause");
 
 function loadGameScript() {
   const script = document.createElement("script");
-  script.src = "./GardenGameMain/dist/assets/index.js";
+  script.src = "../../GardenGameMain/dist/assets/index.js";
   script.type = "module";
   script.crossOrigin = true;
   document.head.appendChild(script);

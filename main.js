@@ -14,18 +14,18 @@ const createWindow = () => {
   });
 
   ipcMain.handle("launch-game", (e, data) => {
-    mainWindow.loadFile("game.html");
+    mainWindow.loadFile("screens/gameScreen/game.html");
     mainWindow.webContents.on("did-finish-load", () => {
       mainWindow.webContents.send("send-save-data", data);
     });
   });
 
   ipcMain.handle("exit-to-title", () => {
-    mainWindow.loadFile("titleScreen/titleScreen.html");
+    mainWindow.loadFile("screens/titleScreen/titleScreen.html");
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile("titleScreen/titleScreen.html");
+  mainWindow.loadFile("screens/titleScreen/titleScreen.html");
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 };
