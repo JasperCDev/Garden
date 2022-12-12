@@ -1,18 +1,15 @@
 import styles from "./App.module.css";
-import FarmLand from "./components/farmLand";
-import GameUI from "./components/GameUI/GameUI";
-import DayNightTint from "./components/DayNightTint";
 import { JSX, onMount } from "solid-js";
-import Sword from "./components/Sword";
 import {
   gameStore,
   pauseGame,
   resumeGame,
   setSelectedSpell,
-} from "./stores/gameStore";
-import GameStore from "./stores/gameStore/store.types";
-import { runGlobalAnimations } from "./animations/animate";
-import DayOver from "@/components/DayOver";
+} from "@/stores/gameStore";
+import GameStore from "@/stores/gameStore/store.types";
+import { runGlobalAnimations } from "@/animations/animate";
+import OtherWorld from "@/components/OtherWorld/OtherWorld";
+import GardenWorld from "@/components/GardenWorld/GardenWorld";
 
 declare global {
   interface Window {
@@ -72,11 +69,7 @@ export default function App() {
 
   return (
     <div class={styles.App} style={appStyles()}>
-      <Sword />
-      <GameUI />
-      <DayNightTint />
-      <FarmLand />
-      {gameStore.world.isDayEnd && <DayOver />}
+      {gameStore.world.isDayEnd ? <OtherWorld /> : <GardenWorld />}
     </div>
   );
 }

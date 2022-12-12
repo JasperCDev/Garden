@@ -9,8 +9,8 @@ const defaultStore = {
       opacity: 0.4,
       color: "#006AFF",
     },
-    isDayEnd: false;
-    paused: false;
+    isDayEnd: false,
+    paused: false,
   },
   farmLand: {
     tiles: [

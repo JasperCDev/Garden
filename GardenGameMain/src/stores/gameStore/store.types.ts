@@ -1,4 +1,3 @@
-import * as PIXI from "pixi.js";
 export type TileType = "soil" | "grass";
 
 export interface TileObject {
@@ -44,6 +43,7 @@ export interface PlantObject {
   cor: [number, number];
   yield: number;
   xp: number;
+  ref: SVGElement | null;
 }
 
 export interface Time {
@@ -105,5 +105,4 @@ export default interface GameStore {
   };
   frameCount: number;
   paused: boolean;
-  pixiApp: PIXI.Application;
 }
