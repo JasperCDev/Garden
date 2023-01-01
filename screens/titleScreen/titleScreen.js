@@ -2,7 +2,8 @@ const fs = require("node:fs/promises");
 const fsSync = require("node:fs");
 const electron = require("electron");
 
-import defaultSaveData from "./defaultSaveData.js";
+import createSaveData from "./createSaveData.js";
+const defaultSaveData = createSaveData();
 
 // File System --------------------------------------------
 function createSaveFile(n) {
