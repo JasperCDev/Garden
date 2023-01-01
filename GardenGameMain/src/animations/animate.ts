@@ -2,13 +2,16 @@ import { onCleanup } from "solid-js";
 import {
   Animation,
   deleteAnimation,
+  deletePlantParticle,
   editAnimation,
   editPlant,
   gameStore,
   incrementFrameCount,
+  PlantParticleObj,
   setIsDayEnd,
   setNewTime,
   setNextTint,
+  setPlantParticle,
 } from "@/stores/gameStore";
 import { framesInADay, getTimeFromFrameCount } from "@/utils";
 
@@ -19,14 +22,8 @@ type AnimationCB = (
 ) => void;
 
 export function runGlobalAnimations() {
-  // this runs on window load, we need to reset animation timeStamps if there are any
-  for (let i = 0; i < gameStore.animations.list.length; i++) {
-    const anim = gameStore.animations.list[i];
-    editAnimation(anim.id, { previousTimeStamp: null });
-  }
-
   const RAFCB: FrameRequestCallback = (currentTime) => {
-    if (gameStore.paused || gameStore.world.isDayEnd) {
+    if (gameStore.world.paused || gameStore.world.isDayEnd) {
       return requestAnimationFrame(RAFCB); // short circuit on pause!
     }
     // these always need to run
@@ -38,14 +35,16 @@ export function runGlobalAnimations() {
       const anim = gameStore.animations.list[i];
       switch (anim.name) {
         case "animate soil":
-          step(currentTime, anim, animateSoil);
+          step(anim, animateSoil);
           break;
         case "level up plant":
-          step(currentTime, anim, animatePlantLevelUp);
+          step(anim, animatePlantLevelUp);
           break;
         case "tick world time":
-          step(currentTime, anim, tickWorldTime);
+          step(anim, tickWorldTime);
           break;
+        case "plant particle":
+          step(anim, animatePlantParticle);
         default:
       }
     }
@@ -55,12 +54,17 @@ export function runGlobalAnimations() {
   onCleanup(() => cancelAnimationFrame(handle));
 }
 
-function step(currentTime: number, animation: Animation, cb: AnimationCB) {
-  let currentTimePassed = animation.progress * animation.duration;
-  let timeSinceLastFrame =
-    currentTime - (animation.previousTimeStamp || currentTime);
-  let timePassed = currentTimePassed + timeSinceLastFrame;
-  let progress = Math.min(timePassed / animation.duration, 1);
+function step(animation: Animation, cb: AnimationCB) {
+  const frameCount = animation.frameCount + 1;
+
+  if (animation.payload.tileId === 7 && animation.name === "plant particle") {
+    console.log(
+      "this should be going up by 1 each frame: ",
+      animation.frameCount,
+      frameCount
+    );
+  }
+  const progress = frameCount / animation.frameDuration;
 
   const diff = progress * animation.range;
   const value = animation.start + diff;
@@ -69,7 +73,7 @@ function step(currentTime: number, animation: Animation, cb: AnimationCB) {
 
   editAnimation(animation.id, {
     progress,
-    previousTimeStamp: currentTime,
+    frameCount,
   });
 
   if (progress === 1) {
@@ -97,11 +101,27 @@ const animatePlantLevelUp: AnimationCB = (newVal, progress, animation) => {
   });
 };
 
-export function tickWorldTime() {
+export const tickWorldTime = () => {
   const time = getTimeFromFrameCount(gameStore.frameCount);
   if (gameStore.frameCount % framesInADay === 0) {
     setIsDayEnd(true);
   }
   setNextTint(time.hour);
   setNewTime(time);
-}
+};
+
+export const animatePlantParticle: AnimationCB = (
+  newVal,
+  progress,
+  animation
+) => {
+  const particle: PlantParticleObj = {
+    id: animation.payload.particleId,
+    tileId: animation.payload.tileId,
+    progress,
+  };
+  setPlantParticle(animation.payload.tileId, particle);
+  if (progress === 1) {
+    deletePlantParticle(animation.payload.particleId);
+  }
+};

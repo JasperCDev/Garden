@@ -31,7 +31,7 @@ export function castCreatePlant(tileId: number) {
   const tile = getTileById(tileId);
   if (tile?.plantId !== -1) return;
   function cast() {
-    const id = gameStore.plants.lastPlantId + 1;
+    const id = gameStore.plants.latestId + 1;
     const newPlant: PlantObject = {
       water: 0,
       life: 600,

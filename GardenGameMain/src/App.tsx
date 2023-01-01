@@ -1,5 +1,5 @@
 import styles from "./App.module.css";
-import { JSX, onMount } from "solid-js";
+import { createEffect, JSX, onMount } from "solid-js";
 import {
   gameStore,
   pauseGame,
@@ -19,6 +19,9 @@ declare global {
 }
 
 export default function App() {
+  createEffect(() =>
+    console.log(JSON.parse(JSON.stringify(gameStore.animations.list)))
+  );
   const appStyles: () => JSX.CSSProperties = () => {
     function getCursor() {
       if (gameStore.world.isDayEnd) return "auto";
@@ -36,7 +39,7 @@ export default function App() {
       }
     }
     let cursor = getCursor();
-    let opacity = gameStore.paused ? 0.7 : 1;
+    let opacity = gameStore.world.paused ? 0.7 : 1;
     return {
       "--cursor": cursor,
       "--opacity": opacity,
@@ -54,7 +57,7 @@ export default function App() {
       if (!Number.isNaN(numKey)) handleNumKeyPress(numKey);
 
       if (e.key === "p") {
-        if (gameStore.paused) {
+        if (gameStore.world.paused) {
           resumeGame();
           window.dispatchEvent(window.gameEvents.resumeEvent);
         } else {

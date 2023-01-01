@@ -4,6 +4,7 @@ import {
   setGameStore,
   TileObject,
   Animation,
+  PlantParticleObj,
 } from "..";
 import { colors } from "@/styles";
 
@@ -46,7 +47,7 @@ export function addNewPlant(newPlant: PlantObject) {
     setGameStore("plants", "list", (p) => [...p, newPlant]);
 
     // increment latest id
-    setGameStore("plants", "lastPlantId", (id) => newPlant.id);
+    setGameStore("plants", "latestId", (id) => newPlant.id);
   }
   editGameStore(addNewPlantCB);
 }
@@ -159,7 +160,7 @@ export function incrementFrameCount() {
 
 export function pauseGame() {
   function pauseGameCB() {
-    setGameStore("paused", true);
+    setGameStore("world", "paused", true);
   }
 
   editGameStore(pauseGameCB);
@@ -167,11 +168,7 @@ export function pauseGame() {
 
 export function resumeGame() {
   function resumeGameCB() {
-    for (let i = 0; i < gameStore.animations.list.length; i++) {
-      const anim = gameStore.animations.list[i];
-      editAnimation(anim.id, { previousTimeStamp: null });
-    }
-    setGameStore("paused", false);
+    setGameStore("world", "paused", false);
   }
 
   editGameStore(resumeGameCB);
@@ -183,4 +180,57 @@ export function setIsDayEnd(isOver: boolean = true) {
   }
 
   editGameStore(setIsDayOverCB);
+}
+
+export function setIsDayStart(isStart: boolean = true) {
+  function setIsDayStartCB() {
+    setGameStore("world", "isDayStart", isStart);
+  }
+
+  editGameStore(setIsDayStartCB);
+}
+
+export function setSwordRef(ref: SVGSVGElement) {
+  function setSwordRefCB() {
+    setGameStore("sword", "ref", ref);
+  }
+
+  editGameStore(setSwordRefCB);
+}
+
+export function addPlantParticle(tileId: number) {
+  function addPlantParticleCB() {
+    setGameStore("plantParticles", (p) => ({
+      ...p,
+      latestId: p.latestId + 1,
+      [tileId]: { tileId, id: p.latestId + 1, progress: 0 },
+    }));
+  }
+
+  editGameStore(addPlantParticleCB);
+}
+
+export function setPlantParticle(
+  tileId: number,
+  newParticle: Partial<PlantParticleObj>
+) {
+  function setPlantParticleCB() {
+    setGameStore("plantParticles", (p) => ({
+      ...p,
+      [tileId]: { ...p[tileId], ...newParticle },
+    }));
+  }
+
+  editGameStore(setPlantParticleCB);
+}
+
+export function deletePlantParticle(particleId: number) {
+  function deletePlantParticleCB() {
+    setGameStore("plantParticles", (p) => ({
+      ...p,
+      [particleId]: undefined,
+    }));
+  }
+
+  editGameStore(deletePlantParticleCB);
 }

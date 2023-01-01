@@ -4,6 +4,8 @@ export interface TileObject {
   plantId: number;
   id: number;
   type: TileType;
+  row: number;
+  column: number;
 }
 
 export type SpellName =
@@ -43,7 +45,6 @@ export interface PlantObject {
   cor: [number, number];
   yield: number;
   xp: number;
-  ref: SVGElement | null;
 }
 
 export interface Time {
@@ -63,6 +64,17 @@ export interface World {
   paused: boolean;
 }
 
+export interface PlantParticleObj {
+  progress: number;
+  id: number;
+  tileId: number;
+}
+
+export interface PlantParticles {
+  [tileId: number]: PlantParticleObj;
+  latestId: number;
+}
+
 export interface Player {
   spellBar: Array<SpellBarItem>;
   selectedSpellId: number;
@@ -79,16 +91,21 @@ export interface FarmLand {
 
 export interface Plants {
   list: Array<PlantObject>;
-  lastPlantId: number;
+  latestId: number;
 }
 
 export interface Animation {
-  name: "animate soil" | "level up plant" | "tick world time";
+  name:
+    | "animate soil"
+    | "level up plant"
+    | "tick world time"
+    | "plant particle";
   progress: number;
   start: number;
   end: number;
   range: number;
-  previousTimeStamp: number | null;
+  frameCount: number;
+  frameDuration: number;
   duration: number;
   payload: any;
   id: number;
@@ -104,5 +121,8 @@ export default interface GameStore {
     latestId: number;
   };
   frameCount: number;
-  paused: boolean;
+  sword: {
+    ref: SVGSVGElement | undefined;
+  };
+  plantParticles: PlantParticles;
 }
